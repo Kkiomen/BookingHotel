@@ -35,12 +35,12 @@ class LoginViewModel @Inject constructor(
         try {
             loginRepository.authUser(email, password)
             withContext(Dispatchers.Main){
-                //emit operation ended with success value
+                //emit when operation ended with success
                 _loginState.value = LoginState.Success
             }
         }catch (e : Exception){
             withContext(Dispatchers.Main){
-                //emit operation ended with failure value
+                //emit when operation ended with failure
                 _loginState.value = LoginState.Error("user could not logged in")
             }
         }
