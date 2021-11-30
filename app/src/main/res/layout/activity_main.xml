@@ -10,14 +10,18 @@
             tools:context="com.specteam.roombooking.ui.MainActivity">
 
         <FrameLayout
-                android:id="@+id/login_panel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        <FrameLayout
                 android:id="@+id/register_panel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+        <FrameLayout
+                android:id="@+id/login_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/register_panel" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
