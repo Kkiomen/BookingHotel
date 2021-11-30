@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    http://inloop.github.io/svg2android/-->
+    <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_house"
+            android:title="Home"
+            app:cnb_iconColor="#03A9F4" />
+
+    <item
+            android:id="@+id/nav_calendar"
+            android:title="Reservation"
+            android:icon="@drawable/icon_calendar"
+            app:cnb_iconColor="#3F51B5" />
+
+    <item
+            android:id="@+id/nav_like"
+            android:title="Likes"
+            android:icon="@drawable/icon_hearth"
+            app:cnb_iconColor="#673AB7" />
+
+    <item
+            android:id="@+id/nav_settings"
+            android:title="Settings"
+            android:icon="@drawable/icon_user"
+            app:cnb_iconColor="#F44336" />
+</menu>
