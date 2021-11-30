@@ -20,10 +20,9 @@ class LoginViewModel @Inject constructor(
 ) : ViewModel() {
 
     sealed class LoginState(){
-        object Loading : LoginState()
+        object Empty : LoginState()
         object Success : LoginState()
         data class Error(val message : String) : LoginState()
-        object Empty : LoginState()
     }
 
     var email : String = ""
@@ -33,19 +32,16 @@ class LoginViewModel @Inject constructor(
     val loginState : StateFlow<LoginState> = _loginState
 
     fun loginUser() = CoroutineScope(Dispatchers.IO).launch {
-        _loginState.value = LoginState.Loading
         try {
             loginRepository.authUser(email, password)
             withContext(Dispatchers.Main){
+                //emit operation ended with success value
                 _loginState.value = LoginState.Success
-
-                Log.i("LOGIN SUCCESS", "user logged in")
             }
         }catch (e : Exception){
             withContext(Dispatchers.Main){
+                //emit operation ended with failure value
                 _loginState.value = LoginState.Error("user could not logged in")
-
-                Log.i("LOGIN FAILURE", "user could not logged in")
             }
         }
     }
