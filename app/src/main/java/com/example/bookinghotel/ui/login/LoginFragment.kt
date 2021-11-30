@@ -1,6 +1,8 @@
 package com.example.bookinghotel.ui.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +11,12 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.bookinghotel.R
 import com.example.bookinghotel.databinding.FragmentLoginBinding
+import com.example.bookinghotel.ui.dashboard.main.MainDashboardActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlin.math.log
 
 @AndroidEntryPoint
@@ -42,6 +47,21 @@ class LoginFragment : Fragment() {
 
             loginViewModel.loginUser()
         });
+
+        lifecycleScope.launchWhenCreated {
+            loginViewModel.loginState.collect {
+                when(it){
+                    is LoginViewModel.LoginState.Success -> {
+                        val intent = Intent(context, MainDashboardActivity::class.java)
+                        startActivity(intent)
+                    }
+                    is LoginViewModel.LoginState.Error -> {
+                        Log.i("LOGIN ERROR", it.message)
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
         return loginBinding.root
     }
