@@ -1,5 +1,6 @@
 package com.example.bookinghotel.ui.register
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.bookinghotel.ui.register.RegisterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +24,12 @@ class RegisterViewModel @Inject constructor(
                 registerRepository.createUser(email, password)
                 withContext(Dispatchers.IO){
                     //TODO:: send info to user ui "Success to create user account"
+                    Log.i("REGISTER SUCCESS", "user register in")
                 }
             }catch (e : Exception){
                 withContext(Dispatchers.Main){
                     //TODO:: send info to user ui "Failed to create user account"
+                    Log.i("REGISTER FAILURE", "user could not register in")
                 }
             }
         }
