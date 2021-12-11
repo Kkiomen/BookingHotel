@@ -4,23 +4,28 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.databinding.DataBindingUtil
 import com.example.bookinghotel.R
 import com.example.bookinghotel.databinding.ActivityMainBinding
+import com.example.bookinghotel.databinding.MainDashboardActivityLayoutBinding
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 
 class MainDashboardActivity : AppCompatActivity() {
 
-    var chipNavigationBar: ChipNavigationBar? = null
+    private lateinit var binding : MainDashboardActivityLayoutBinding
+    private var chipNavigationBar: ChipNavigationBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_dashboard_activity_layout)
+        binding = MainDashboardActivityLayoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        chipNavigationBar = findViewById(R.id.bottom_nav_bar);
+
+        chipNavigationBar = binding.bottomNavBar
         setUpTapBar()
     }
-
 
     private fun setUpTapBar(){
         chipNavigationBar?.setOnItemSelectedListener(){
