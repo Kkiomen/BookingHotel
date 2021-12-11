@@ -10,9 +10,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withCreated
 import com.example.bookinghotel.R
 import com.example.bookinghotel.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -42,6 +45,20 @@ class RegisterFragment : Fragment() {
 
             registerViewModel.registerUser()
         });
+
+        lifecycleScope.launchWhenCreated {
+            registerViewModel.registerState.collect {
+                when(it){
+                    is RegisterViewModel.RegisterState.Success -> {
+                        //Do something with ui when user creation finished with success
+                    }
+                    is RegisterViewModel.RegisterState.Error -> {
+                        //Do something with ui when user creation finished with error
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
         return registerBinding.root
 
