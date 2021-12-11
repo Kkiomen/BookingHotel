@@ -1,14 +1,8 @@
 package com.example.bookinghotel.ui.login
 
-import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bookinghotel.ui.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.lang.Exception
@@ -25,6 +19,7 @@ class LoginViewModel @Inject constructor(
         data class Error(val message : String) : LoginState()
     }
 
+    //add validation
     var email : String = ""
     var password : String = ""
 
