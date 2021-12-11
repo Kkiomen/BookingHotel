@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:background="#EEEEEE">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+    <RelativeLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/bottom_nav_bar"
-            android:layout_alignParentBottom="true"
-            android:background="#FFF"
-            app:cnb_menuResource="@menu/nav_menu"
-    >
+            android:background="#EEEEEE">
 
-    </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+        <com.ismaeldivita.chipnavigation.ChipNavigationBar
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/bottom_nav_bar"
+                android:layout_alignParentBottom="true"
+                android:background="#FFF"
+                app:cnb_menuResource="@menu/nav_menu">
 
-
-
-<!--    <LinearLayout-->
-<!--            android:layout_width="fill_parent"-->
-<!--                  android:background = "@drawable/bg_app"-->
-<!--                  android:layout_height="fill_parent"-->
-<!--                  android:orientation="vertical"-->
-<!--                  android:weightSum="1.0" >-->
-<!--        <LinearLayout-->
-<!--                android:layout_width="fill_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:weightSum="9"-->
-<!--                android:layout_margin="8dp"-->
-<!--                android:gravity="center"-->
-<!--        >-->
-
-
-<!--        </LinearLayout>-->
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/textField"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:hint="@string/label">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--            />-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+        </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 
 
-<!--    </LinearLayout>-->
-</RelativeLayout>
+        <!--    <LinearLayout-->
+        <!--            android:layout_width="fill_parent"-->
+        <!--                  android:background = "@drawable/bg_app"-->
+        <!--                  android:layout_height="fill_parent"-->
+        <!--                  android:orientation="vertical"-->
+        <!--                  android:weightSum="1.0" >-->
+        <!--        <LinearLayout-->
+        <!--                android:layout_width="fill_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:weightSum="9"-->
+        <!--                android:layout_margin="8dp"-->
+        <!--                android:gravity="center"-->
+        <!--        >-->
+
+
+        <!--        </LinearLayout>-->
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--                android:id="@+id/textField"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:hint="@string/label">-->
+
+        <!--            <com.google.android.material.textfield.TextInputEditText-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--            />-->
+
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+        <!--    </LinearLayout>-->
+    </RelativeLayout>
+</layout>
