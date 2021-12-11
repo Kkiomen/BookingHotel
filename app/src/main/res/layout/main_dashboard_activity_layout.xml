@@ -2,54 +2,69 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-            android:layout_height="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="#EEEEEE">
+            android:layout_height="match_parent">
 
-        <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        <FrameLayout
+                android:id="@+id/home_panel"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/bottom_nav_bar"
-                android:layout_alignParentBottom="true"
-                android:background="#FFF"
-                app:cnb_menuResource="@menu/nav_menu">
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_layout"/>
 
-        </com.ismaeldivita.chipnavigation.ChipNavigationBar>
+        <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="#EEEEEE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:id="@+id/bottom_layout">
 
+            <com.ismaeldivita.chipnavigation.ChipNavigationBar
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/bottom_nav_bar"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFF"
+                    app:cnb_menuResource="@menu/nav_menu">
 
-
-        <!--    <LinearLayout-->
-        <!--            android:layout_width="fill_parent"-->
-        <!--                  android:background = "@drawable/bg_app"-->
-        <!--                  android:layout_height="fill_parent"-->
-        <!--                  android:orientation="vertical"-->
-        <!--                  android:weightSum="1.0" >-->
-        <!--        <LinearLayout-->
-        <!--                android:layout_width="fill_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:weightSum="9"-->
-        <!--                android:layout_margin="8dp"-->
-        <!--                android:gravity="center"-->
-        <!--        >-->
-
-
-        <!--        </LinearLayout>-->
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--                android:id="@+id/textField"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:hint="@string/label">-->
-
-        <!--            <com.google.android.material.textfield.TextInputEditText-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--            />-->
-
-        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+            </com.ismaeldivita.chipnavigation.ChipNavigationBar>
 
 
+            <!--    <LinearLayout-->
+            <!--            android:layout_width="fill_parent"-->
+            <!--                  android:background = "@drawable/bg_app"-->
+            <!--                  android:layout_height="fill_parent"-->
+            <!--                  android:orientation="vertical"-->
+            <!--                  android:weightSum="1.0" >-->
+            <!--        <LinearLayout-->
+            <!--                android:layout_width="fill_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:weightSum="9"-->
+            <!--                android:layout_margin="8dp"-->
+            <!--                android:gravity="center"-->
+            <!--        >-->
 
-        <!--    </LinearLayout>-->
-    </RelativeLayout>
+
+            <!--        </LinearLayout>-->
+            <!--        <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/textField"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:hint="@string/label">-->
+
+            <!--            <com.google.android.material.textfield.TextInputEditText-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--            />-->
+
+            <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+            <!--    </LinearLayout>-->
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

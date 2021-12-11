@@ -1,5 +1,6 @@
 package com.example.bookinghotel.di
 
+import com.example.bookinghotel.ui.dashboard.home.HomeRepository
 import com.example.bookinghotel.ui.login.LoginRepository
 import com.example.bookinghotel.ui.register.RegisterRepository
 import dagger.Module
@@ -19,5 +20,9 @@ class AuthModule {
     @Singleton
     @Provides
     fun provideRegisterRepository() : RegisterRepository = RegisterRepository()
+
+    @Singleton
+    @Provides
+    fun provideHomeRepository() : HomeRepository = HomeRepository()
 
 }

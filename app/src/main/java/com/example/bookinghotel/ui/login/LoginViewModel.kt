@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(
         }catch (e : Exception){
             withContext(Dispatchers.Main){
                 //emit when operation ended with failure
-                _loginState.value = LoginState.Error("user could not logged in")
+                _loginState.value = LoginState.Error(e.message.toString())
             }
         }
     }
