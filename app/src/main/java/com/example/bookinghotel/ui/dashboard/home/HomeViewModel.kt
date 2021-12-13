@@ -1,11 +1,7 @@
 package com.example.bookinghotel.ui.dashboard.home
 
 import androidx.lifecycle.ViewModel
-import com.example.bookinghotel.data.models.Hotel
-import com.example.bookinghotel.data.models.Room
-import com.example.bookinghotel.data.models.toHotelRoom
 import com.example.bookinghotel.domain.models.HotelRoom
-import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +26,7 @@ class HomeViewModel @Inject constructor(
     //because in HotelRoom Model we have List<Room> and in Hotel Model we have List<Int> of Rooms ID
     //So it will be easier to have two data models in one Model (HotelRoom) than use them separately (Hotel, Room)
     //lukassakwa
-    val hotels : MutableList<Hotel> = mutableListOf()
+    var hotels : MutableList<HotelRoom> = mutableListOf()
 
     private val _homeState = MutableStateFlow<HomeState>(HomeState.Empty)
     val homeState : StateFlow<HomeState> = _homeState
@@ -41,14 +37,7 @@ class HomeViewModel @Inject constructor(
     //lukassakwa
     fun listOfHotels() = CoroutineScope(Dispatchers.IO).launch {
         try {
-            var hotel: Hotel? = null
-
-            homeRepository.getHotels().forEach{ document ->
-                hotel = document.toObject()
-                hotel?.let {
-                        it -> hotels.add(it)
-                }
-            }
+            hotels = homeRepository.findAllHotelRoom()
 
             withContext(Dispatchers.Main){
                 _homeState.value = HomeState.Success
