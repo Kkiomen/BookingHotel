@@ -21,8 +21,8 @@ class HotelRepository {
     suspend fun findAllHotels(): QuerySnapshot? {
         return firestore.collection("hotel").get(source).await()
     }
-    suspend fun findAllHotelsByCity(chosenCity : String){
-        firestore.collection("hotel").whereEqualTo("city", chosenCity).get(source).await()
+    suspend fun findAllHotelsByCity(chosenCity : String): QuerySnapshot? {
+        return firestore.collection("hotel").whereEqualTo("city", chosenCity).get(source).await()
     }
 
     fun addHotel(documentId : Int){
