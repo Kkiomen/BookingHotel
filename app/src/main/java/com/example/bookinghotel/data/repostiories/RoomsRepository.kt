@@ -1,6 +1,5 @@
 package com.example.bookinghotel.data.repostiories
 
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore

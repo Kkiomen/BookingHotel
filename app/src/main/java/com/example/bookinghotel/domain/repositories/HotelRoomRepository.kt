@@ -19,6 +19,8 @@ class HotelRoomRepository @Inject constructor(
     private val roomsRepository: RoomsRepository,
     private val roomRepository: RoomRepository
 ) {
+
+    //this function is responsible for joining 2 models hotel and room into one model which is in Domain
     suspend fun findAllHotelRooms() = withContext(Dispatchers.IO) {
 
             //getting all hotels Documents reference
@@ -31,11 +33,11 @@ class HotelRoomRepository @Inject constructor(
                     val hotel : Hotel? = hotelRepository.findHotelById(hotelReference.toString())?.toObject()
                     //getting list of Rooms
                     val rooms : MutableList<Room> = mutableListOf()
-                    roomsRepository.findAllHotelRooms(hotelReference.reference.toString())?.data?.values?.forEach{
+                    roomsRepository.findAllHotelRooms(hotelReference.toString())?.data?.values?.forEach{
                         roomRepository.findRoomById(it.toString())?.toObject<Room>()?.let { it1 -> rooms.add(it1) }
                     }
                     //joining 2 models (hotel, List<Room>) to one HotelRoom
-                    val hotelRoom : HotelRoom = HotelRoom(hotel?.name, hotel?.city, hotel?.address1, hotel?.address2, hotel?.address3, rooms.toList())
+                    val hotelRoom = HotelRoom(hotel?.name, hotel?.city, hotel?.address1, hotel?.address2, hotel?.address3, rooms.toList())
                     hotels.add(hotelRoom)
                 }
             }
