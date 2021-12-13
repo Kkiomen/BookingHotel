@@ -1,6 +1,7 @@
 package com.example.bookinghotel.ui.dashboard.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
+        viewModel.listOfHotels()
+
         lifecycleScope.launchWhenCreated {
             viewModel.homeState.collect{
                 when(it){
@@ -31,6 +34,7 @@ class HomeFragment : Fragment() {
                         //TODO:: viewModel.hotels ->  list of Hotels from vieModel
                         //TODO:: viewModel.listOfHotels() -> method which download list of hotels from firebase and put them into hotels list in viewModel
                         //LukasSakwa
+                        Log.i("hotelRoom", viewModel.hotels.toString())
                     }
                     is HomeViewModel.HomeState.Error -> {
                         //TODO:: Handle error on UI
