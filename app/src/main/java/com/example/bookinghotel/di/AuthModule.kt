@@ -21,8 +21,4 @@ class AuthModule {
     @Provides
     fun provideRegisterRepository() : RegisterRepository = RegisterRepository()
 
-    @Singleton
-    @Provides
-    fun provideHomeRepository() : HomeRepository = HomeRepository()
-
 }
