@@ -8,9 +8,7 @@ import com.example.bookinghotel.data.repostiories.RoomsRepository
 import com.example.bookinghotel.domain.models.HotelRoom
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -20,6 +18,7 @@ class HotelRoomRepository @Inject constructor(
     private val roomRepository: RoomRepository
 ) {
 
+    //TODO:: NIE DZIALA DO CHUJA PANA. DO ZROBIENIA
     //this function is responsible for joining 2 models hotel and room into one model which is in Domain
     suspend fun findAllHotelRooms() = withContext(Dispatchers.IO) {
 
@@ -33,9 +32,12 @@ class HotelRoomRepository @Inject constructor(
                     val hotel : Hotel? = hotelRepository.findHotelById(hotelReference.toString())?.toObject()
                     //getting list of Rooms
                     val rooms : MutableList<Room> = mutableListOf()
-                    roomsRepository.findAllHotelRooms(hotelReference.toString())?.data?.values?.forEach{
-                        roomRepository.findRoomById(it.toString())?.toObject<Room>()?.let { it1 -> rooms.add(it1) }
+                    val roomsList : List<String> = roomsRepository.findAllHotelRooms(hotelReference.toString())?.data?.get("hotel_rooms") as List<String>
+                    roomsList.forEach{
+                        val room = roomRepository.findRoomById(it)?.toObject<Room>()
+                        room?.let { it1 -> rooms.add(it1) }
                     }
+
                     //joining 2 models (hotel, List<Room>) to one HotelRoom
                     val hotelRoom = HotelRoom(hotel?.name, hotel?.city, hotel?.address1, hotel?.address2, hotel?.address3, rooms.toList())
                     hotels.add(hotelRoom)
