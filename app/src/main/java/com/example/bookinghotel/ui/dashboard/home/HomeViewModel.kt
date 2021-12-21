@@ -1,7 +1,10 @@
 package com.example.bookinghotel.ui.dashboard.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.bookinghotel.domain.models.HotelRoom
+import com.example.bookinghotel.data.models.Hotel
+import com.example.bookinghotel.data.models.Room
+import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,24 +25,21 @@ class HomeViewModel @Inject constructor(
         data class Error(val message : String) : HomeState()
     }
 
-    //I will try use HotelRoom Model instead of Hotel
-    //because in HotelRoom Model we have List<Room> and in Hotel Model we have List<Int> of Rooms ID
-    //So it will be easier to have two data models in one Model (HotelRoom) than use them separately (Hotel, Room)
-    //lukassakwa
-    var hotels : MutableList<HotelRoom> = mutableListOf()
+    //List of rooms
+    val hotels : MutableList<Hotel> = mutableListOf()
 
     private val _homeState = MutableStateFlow<HomeState>(HomeState.Empty)
     val homeState : StateFlow<HomeState> = _homeState
 
-    //Work in progress
-    //As I wrote before I need to implement function which convert Hotel and Room Model to one model HotelRoom
-    //Function will be in other class maybe in data class or service class
-    //lukassakwa
+    //function returnd Hotel and List of Rooms
     fun listOfHotels() = CoroutineScope(Dispatchers.IO).launch {
         try {
-            hotels = homeRepository.findAllHotelRoom()
+            val documents = homeRepository.findAllHotelsWithRooms()?.documents
 
             withContext(Dispatchers.Main){
+                documents?.forEach{
+                    it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
+                }
                 _homeState.value = HomeState.Success
             }
         }catch (e : Exception){

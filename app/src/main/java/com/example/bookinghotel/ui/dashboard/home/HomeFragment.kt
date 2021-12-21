@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,8 +21,12 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
 
+    private lateinit var textView : TextView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        textView = binding.mainText
 
         viewModel.listOfHotels()
 
@@ -34,6 +39,7 @@ class HomeFragment : Fragment() {
                         //TODO:: viewModel.hotels ->  list of Hotels from vieModel
                         //TODO:: viewModel.listOfHotels() -> method which download list of hotels from firebase and put them into hotels list in viewModel
                         //LukasSakwa
+                        textView.text = viewModel.hotels.get(0).rooms.toString()
                         Log.i("hotelRoom", viewModel.hotels.toString())
                     }
                     is HomeViewModel.HomeState.Error -> {

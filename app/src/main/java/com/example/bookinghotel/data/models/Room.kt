@@ -1,9 +1,9 @@
 package com.example.bookinghotel.data.models
 
 data class Room(
-    val generatedKey : String? = null,
-    val number: String? = null,
+    val availability : Boolean? = null,
+    val generated_key : String? = null,
+    val number : String? = null,
     val persons : String? = null,
-    val availability: Boolean = false,
-    //val description: String? = null,
+    val hotel_name : Hotel? = null,
 )

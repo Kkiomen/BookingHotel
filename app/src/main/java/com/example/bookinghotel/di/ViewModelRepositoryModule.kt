@@ -1,6 +1,6 @@
 package com.example.bookinghotel.di
 
-import com.example.bookinghotel.domain.repositories.HotelRoomRepository
+import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.ui.dashboard.home.HomeRepository
 import dagger.Module
 import dagger.Provides
