@@ -27,6 +27,7 @@ class HomeViewModel @Inject constructor(
 
     //List of rooms
     val hotels : MutableList<Hotel> = mutableListOf()
+    val rooms : MutableList<Room> = mutableListOf()
 
     private val _homeState = MutableStateFlow<HomeState>(HomeState.Empty)
     val homeState : StateFlow<HomeState> = _homeState
@@ -35,11 +36,14 @@ class HomeViewModel @Inject constructor(
     fun listOfHotels() = CoroutineScope(Dispatchers.IO).launch {
         try {
             val documents = homeRepository.findAllHotelsWithRooms()?.documents
+            documents?.forEach{
+                it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
+            }
+            hotels.forEach{
+                it.rooms?.forEach{ room -> rooms.add(room) }
+            }
 
             withContext(Dispatchers.Main){
-                documents?.forEach{
-                    it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
-                }
                 _homeState.value = HomeState.Success
             }
         }catch (e : Exception){

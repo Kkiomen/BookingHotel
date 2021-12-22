@@ -53,6 +53,7 @@ class LoginFragment : Fragment() {
                 when(it){
                     is LoginViewModel.LoginState.Success -> {
                         val intent = Intent(context, MainDashboardActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     is LoginViewModel.LoginState.Error -> {

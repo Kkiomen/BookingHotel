@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.bookinghotel.R
 import com.example.bookinghotel.databinding.FragmentHomeBinding
 import com.example.bookinghotel.databinding.FragmentReservationBinding
 import com.example.bookinghotel.ui.dashboard.home.HomeViewModel
@@ -19,7 +21,12 @@ class ReservationFragment : Fragment() {
     private lateinit var binding : FragmentReservationBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentReservationBinding.inflate(layoutInflater)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_reservation,
+            container,
+            false
+        )
 
         return binding.root
     }

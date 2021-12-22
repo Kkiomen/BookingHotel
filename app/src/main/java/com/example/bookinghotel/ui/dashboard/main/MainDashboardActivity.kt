@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainDashboardActivity : AppCompatActivity() {
 
     private lateinit var binding : MainDashboardActivityLayoutBinding
-    private lateinit var homeFragmentTransaction : FragmentTransaction
     private var chipNavigationBar: ChipNavigationBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,6 @@ class MainDashboardActivity : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        homeFragmentTransaction = supportFragmentManager.beginTransaction()
         chipNavigationBar = binding.bottomNavBar
 
         setUpTapBar()
@@ -39,17 +37,17 @@ class MainDashboardActivity : AppCompatActivity() {
 
     private fun setUpTapBar(){
         chipNavigationBar?.setOnItemSelectedListener(){
+            val homeFragmentTransaction = supportFragmentManager.beginTransaction()
             when(it){
                 R.id.nav_home -> {
                     homeFragmentTransaction
-                        .replace(R.id.home_panel, HomeFragment())
-                        .commitAllowingStateLoss()
+                        .replace(binding.homePanel.id, HomeFragment())
+
                     Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_calendar -> {
                     homeFragmentTransaction
-                        .replace(R.id.home_panel, ReservationFragment())
-                        .commitAllowingStateLoss()
+                        .replace(binding.homePanel.id, ReservationFragment())
 
                     Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
                 }
@@ -58,11 +56,12 @@ class MainDashboardActivity : AppCompatActivity() {
                 }
                 R.id.nav_settings -> {
                     homeFragmentTransaction
-                        .replace(R.id.home_panel, SettingsFragment())
-                        .commitAllowingStateLoss()
+                        .replace(binding.homePanel.id, SettingsFragment())
+
                     Toast.makeText(this, "SETTINGS", Toast.LENGTH_SHORT).show()
                 }
             }
+            homeFragmentTransaction.commit()
         }
     }
 

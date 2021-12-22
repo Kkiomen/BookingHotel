@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.login_panel, LoginFragment())
                 .replace(R.id.register_panel, RegisterFragment())
-                .commitAllowingStateLoss()
+                .commit()
         }
     }
 }
