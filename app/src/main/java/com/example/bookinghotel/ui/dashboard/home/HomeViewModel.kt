@@ -37,8 +37,12 @@ class HomeViewModel @Inject constructor(
         try {
             homeRepository.findAllHotelsWithRooms()
 
+            //sprawdza czy pokoje sa dostepne i wyrzuca liste pokoji ktore maja ustawione pole availability na true
+            rooms = homeRepository.hotelSingleRoom
+                .filter { hotelSingleRoom -> hotelSingleRoom.room?.availability == true }
+                .toMutableList()
+
             withContext(Dispatchers.Main){
-                rooms = homeRepository.hotelSingleRoom
                 _homeState.value = HomeState.Success
             }
         }catch (e : Exception){

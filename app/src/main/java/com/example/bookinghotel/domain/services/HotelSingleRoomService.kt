@@ -34,8 +34,12 @@ class HotelSingleRoomService @Inject constructor(
             it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
         }
         hotels.forEach{
-            it.rooms?.forEach{ room -> hotelSingleRoomList.add(HotelSingleRoom(it.name, room)) }
+            it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(it.name, room)) }
         }
     }
+
+    //TODO:: funkcja ktora zmienia dostepnosc pokojuu na niedostepny
+    //TODO:: przypisuje pokoj do uzytkownika
+    //TODO:: przypisuje czas uzytkownikowi korzystania z pokoju
 
 }
