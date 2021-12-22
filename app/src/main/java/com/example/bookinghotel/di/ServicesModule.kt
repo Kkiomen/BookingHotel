@@ -2,7 +2,6 @@ package com.example.bookinghotel.di
 
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.domain.services.HotelSingleRoomService
-import com.example.bookinghotel.ui.dashboard.home.HomeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,10 +10,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ViewModelRepositoryModule {
+class ServicesModule {
 
     @Singleton
     @Provides
-    fun provideHomeRepository(hotelSingleRoomService: HotelSingleRoomService) : HomeRepository = HomeRepository(hotelSingleRoomService)
+    fun provideHotelSingleRoomService(hotelRoomRepository: HotelRoomRepository) : HotelSingleRoomService = HotelSingleRoomService(hotelRoomRepository)
+
 
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.Room
+import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -26,8 +27,7 @@ class HomeViewModel @Inject constructor(
     }
 
     //List of rooms
-    val hotels : MutableList<Hotel> = mutableListOf()
-    val rooms : MutableList<Room> = mutableListOf()
+    var rooms : MutableList<HotelSingleRoom> = mutableListOf()
 
     private val _homeState = MutableStateFlow<HomeState>(HomeState.Empty)
     val homeState : StateFlow<HomeState> = _homeState
@@ -35,15 +35,10 @@ class HomeViewModel @Inject constructor(
     //function returnd Hotel and List of Rooms
     fun listOfHotels() = CoroutineScope(Dispatchers.IO).launch {
         try {
-            val documents = homeRepository.findAllHotelsWithRooms()?.documents
-            documents?.forEach{
-                it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
-            }
-            hotels.forEach{
-                it.rooms?.forEach{ room -> rooms.add(room) }
-            }
+            homeRepository.findAllHotelsWithRooms()
 
             withContext(Dispatchers.Main){
+                rooms = homeRepository.hotelSingleRoom
                 _homeState.value = HomeState.Success
             }
         }catch (e : Exception){

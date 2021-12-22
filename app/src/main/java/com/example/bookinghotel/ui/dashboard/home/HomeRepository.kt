@@ -1,27 +1,22 @@
 package com.example.bookinghotel.ui.dashboard.home
 
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
+import com.example.bookinghotel.domain.services.HotelSingleRoomService
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.Source
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(
-    private val hotelRoomRepository : HotelRoomRepository
+    private val hotelSingleRoomService: HotelSingleRoomService
 ){
 
-    private val source = Source.CACHE
+    val hotelSingleRoom = hotelSingleRoomService.hotelSingleRoomList
 
-    suspend fun findAllHotelsWithRooms(): QuerySnapshot? {
-        return hotelRoomRepository.findAllHotels().get(source).await()
+    suspend fun findAllHotelsWithRooms() {
+        hotelSingleRoomService.findAllHotelRooms()
     }
 
-    suspend fun findHotelWithRoomsById(documentId : String) {
-        hotelRoomRepository.findHotelById(documentId).get(source).await()
-    }
-
-    suspend fun findHotelsWithRoomByCity(city : String){
-        hotelRoomRepository.findAllHotelsByCity(city).get(source).await()
-    }
 
 }
