@@ -1,15 +1,10 @@
 package com.example.bookinghotel.domain.services
 
-import android.util.Log
 import com.example.bookinghotel.data.models.Hotel
-import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.domain.model.HotelSingleRoom
-import com.example.bookinghotel.ui.dashboard.home.HomeViewModel
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -40,6 +35,9 @@ class HotelSingleRoomService @Inject constructor(
 
     //TODO:: funkcja ktora zmienia dostepnosc pokojuu na niedostepny
     //TODO:: przypisuje pokoj do uzytkownika
-    //TODO:: przypisuje czas uzytkownikowi korzystania z pokoju
+    //TODO:: przypisuje date wygasniecia pokoju dla uzytkownika
+    suspend fun reserveRoom(room : HotelSingleRoom) = withContext(Dispatchers.IO){
+
+    }
 
 }

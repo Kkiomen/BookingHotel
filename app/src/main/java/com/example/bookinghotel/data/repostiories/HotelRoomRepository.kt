@@ -26,4 +26,8 @@ class HotelRoomRepository {
         return firestore.collection("hotel").document(documentId.toString())
     }
 
+    fun hotelCollection(): CollectionReference {
+        return firestore.collection("hotel")
+    }
+
 }

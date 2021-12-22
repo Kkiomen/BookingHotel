@@ -22,11 +22,17 @@ class MainDashboardActivity : AppCompatActivity() {
 
     private lateinit var binding : MainDashboardActivityLayoutBinding
     private var chipNavigationBar: ChipNavigationBar? = null
+    private lateinit var homeFragmentTransaction : FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainDashboardActivityLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //startowy fragment (Home Fragment)
+        homeFragmentTransaction = supportFragmentManager.beginTransaction()
+            .replace(binding.homePanel.id, HomeFragment())
+        homeFragmentTransaction.commit()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
@@ -37,7 +43,7 @@ class MainDashboardActivity : AppCompatActivity() {
 
     private fun setUpTapBar(){
         chipNavigationBar?.setOnItemSelectedListener(){
-            val homeFragmentTransaction = supportFragmentManager.beginTransaction()
+            homeFragmentTransaction = supportFragmentManager.beginTransaction()
             when(it){
                 R.id.nav_home -> {
                     homeFragmentTransaction
