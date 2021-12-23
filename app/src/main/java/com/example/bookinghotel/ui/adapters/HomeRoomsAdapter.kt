@@ -24,7 +24,7 @@ class HomeRoomsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.titleTextView.text = roomsList[position].hotelName
+        holder.titleTextView.text = roomsList[position].hotel?.name
         holder.descriptionTextView.text = roomsList[position].room?.description.toString()
     }
 

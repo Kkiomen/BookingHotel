@@ -1,8 +1,10 @@
 package com.example.bookinghotel.domain.services
 
 import com.example.bookinghotel.data.models.Hotel
+import com.example.bookinghotel.data.models.toSingleHotel
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.domain.model.HotelSingleRoom
+import com.example.bookinghotel.domain.model.SingleHotel
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -29,11 +31,12 @@ class HotelSingleRoomService @Inject constructor(
             it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
         }
         hotels.forEach{
-            it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(it.name, room)) }
+            val hotel : SingleHotel = it.toSingleHotel()
+            it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(hotel, room)) }
         }
     }
 
-    //TODO:: funkcja ktora zmienia dostepnosc pokojuu na niedostepny
+    //TODO:: funkcja ktora zmienia dostepnosc pokoju na niedostepny
     //TODO:: przypisuje pokoj do uzytkownika
     //TODO:: przypisuje date wygasniecia pokoju dla uzytkownika
     suspend fun reserveRoom(room : HotelSingleRoom) = withContext(Dispatchers.IO){
