@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".ui.dashboard.main.MainDashboardActivity">
         </activity>
+        <activity android:name=".ui.dashboard.home.detailed_information.DetailedInformationActivity">
+        </activity>
     </application>
 
 </manifest>
