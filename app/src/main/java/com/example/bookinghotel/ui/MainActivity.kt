@@ -19,13 +19,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        val rooms : MutableList<Room> = mutableListOf()
-//        rooms.add(Room("nie kradnij mydel kurwo jebana", true, "&6)jhsbm*gns#", "14", "2"))
-//        rooms.add(Room("mam wyjebane w opis", false, "&hkjfsdjk^&%^&%A&DSjkhkl*gns#", "17", "3"))
-//        rooms.add(Room("Piekny prysznic caly ten", true, "HDJKS^*^&*kLJLKdas68#", "24", "4"))
+//        rooms.add(Room("Najpiekniejszy widok ugulem", true, "&6*K&J^*gns#", "14", "2"))
+//        rooms.add(Room("pierdole wasze matki", false, "&hkjfsdjk^&%^&*gns#", "17", "3"))
+//        rooms.add(Room("Zydzi do pieca", true, "HDJKS^*^&*()&*(DSA#", "24", "4"))
 //
-//        val hotel : Hotel = Hotel("Ibis", "Czerniakow 22", "23-222", "Warsaw", rooms)
+//        val hotel : Hotel = Hotel("Mariott", "Wojska 22", "23-224", "Warsaw", rooms)
 //
-//        Firebase.firestore.collection("hotel").document("second").set(hotel)
+//        Firebase.firestore.collection("hotel").document("first").set(hotel)
 //            .addOnSuccessListener { Log.d("success", "success") }
 //            .addOnFailureListener { Log.d("failuure", "failure") }
 

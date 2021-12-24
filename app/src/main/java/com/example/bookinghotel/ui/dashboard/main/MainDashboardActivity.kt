@@ -30,9 +30,9 @@ class MainDashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //startowy fragment (Home Fragment)
-        homeFragmentTransaction = supportFragmentManager.beginTransaction()
-            .replace(binding.homePanel.id, HomeFragment())
-        homeFragmentTransaction.commit()
+//        homeFragmentTransaction = supportFragmentManager.beginTransaction()
+//            .replace(binding.homePanel.id, HomeFragment())
+//        homeFragmentTransaction.commit()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 

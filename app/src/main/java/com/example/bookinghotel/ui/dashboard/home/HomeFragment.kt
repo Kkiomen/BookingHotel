@@ -43,7 +43,8 @@ class HomeFragment : Fragment() {
                 when(it){
                     is HomeViewModel.HomeState.Success -> {
                         //TODO:: Recycler View
-                        roomsRecyclerView.adapter = HomeRoomsAdapter(viewModel.rooms)
+                        val adapter = HomeRoomsAdapter(viewModel.rooms)
+                        roomsRecyclerView.adapter = adapter
                     }
                     is HomeViewModel.HomeState.Error -> {
                         //TODO:: Handle error on UI

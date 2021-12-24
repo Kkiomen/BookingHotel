@@ -1,12 +1,17 @@
 package com.example.bookinghotel.domain.services
 
+import android.util.Log
 import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.toSingleHotel
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.example.bookinghotel.domain.model.SingleHotel
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -36,10 +41,35 @@ class HotelSingleRoomService @Inject constructor(
         }
     }
 
-    //TODO:: funkcja ktora zmienia dostepnosc pokoju na niedostepny
+    //funkcja ktora zmienia dostepnosc pokoju na niedostepny -> Done
     //TODO:: przypisuje pokoj do uzytkownika
     //TODO:: przypisuje date wygasniecia pokoju dla uzytkownika
-    suspend fun reserveRoom(room : HotelSingleRoom) = withContext(Dispatchers.IO){
+    //TODO:: zaimplementowac Coroutines
+    //wersja testowa
+    fun reserveRoom(room : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
+        try {
+            val result = room.room?.let {
+                hotelRoomRepository.hotelCollection()
+                    .whereArrayContains("rooms", it)
+                    .get()
+                    .await()
+            }
+
+            result?.forEach { document ->
+                val userRoom = room.room
+                val docIdRef = hotelRoomRepository.hotelCollection().document(document.id)
+
+                docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+
+                userRoom.availability = false
+                docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+            }
+
+            Log.d("SuccesAvaib", "Change success")
+
+        }catch (e : Exception){
+            Log.d("FailureAvaib", e.toString())
+        }
 
     }
 

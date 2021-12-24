@@ -23,6 +23,14 @@ class DetailedInformationActivity : AppCompatActivity() {
         viewModel.hotelRoom = intent.getSerializableExtra("HotelRoom") as HotelSingleRoom?
 
         binding.testTextView.text = viewModel.hotelRoom.toString()
+
+        binding.reservationButton.setOnClickListener{
+            roomReservation()
+        }
+    }
+
+    private fun roomReservation(){
+        viewModel.roomReservation()
     }
 
 }
