@@ -1,5 +1,6 @@
 package com.example.bookinghotel.data.repostiories
 
+import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.data.models.UserRooms
 import com.example.bookinghotel.domain.model.UserReservedRoom
 import com.google.android.gms.tasks.Task
@@ -21,13 +22,20 @@ class UserReservationRepository : DaoRepository{
         return collection.get(source).await()
     }
 
-    fun userReservationCollection(): CollectionReference {
+    suspend fun outDatedUserReservationRooms(currentDate : String): QuerySnapshot? {
         return collection
+            .whereLessThanOrEqualTo("expirationDate", currentDate)
+            .get()
+            .await()
     }
 
     fun add(userRooms: UserRooms) {
         //collection.document(documentId).update("user_rooms", FieldValue.arrayUnion(userRooms))
         collection.add(userRooms)
+    }
+
+    fun userReservationCollection(): CollectionReference {
+        return collection
     }
 
 }

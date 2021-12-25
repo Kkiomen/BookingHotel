@@ -1,5 +1,6 @@
 package com.example.bookinghotel.data.repostiories
 
+import com.example.bookinghotel.data.models.Room
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,16 +19,26 @@ class HotelRoomRepository : DaoRepository{
         return collection.get(source).await()
     }
 
+    suspend fun findAllHotelsByCity(chosenCity : String): QuerySnapshot? {
+        return collection
+            .whereEqualTo("city", chosenCity)
+            .get(source)
+            .await()
+    }
+
+    suspend fun findAllMatchingRooms(room : Room): QuerySnapshot? {
+        return collection
+            .whereArrayContains("rooms", room)
+            .get()
+            .await()
+    }
+
     fun add(documentId : Int): DocumentReference {
         return collection.document(documentId.toString())
     }
 
-    suspend fun findAllHotelsByCity(chosenCity : String): QuerySnapshot? {
-        return collection.whereEqualTo("city", chosenCity).get(source).await()
-    }
-
-    fun hotelCollection(): CollectionReference {
-        return collection
+    fun findHotelDocumentById(documentId: String): DocumentReference {
+        return collection.document(documentId)
     }
 
 }

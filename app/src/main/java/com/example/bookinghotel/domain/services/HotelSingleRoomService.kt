@@ -2,9 +2,10 @@ package com.example.bookinghotel.domain.services
 
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.example.bookinghotel.data.models.Hotel
+import com.example.bookinghotel.data.models.UserRooms
 import com.example.bookinghotel.data.models.toSingleHotel
+import com.example.bookinghotel.data.models.toUserReservedRoom
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.data.repostiories.UserReservationRepository
 import com.example.bookinghotel.domain.model.HotelSingleRoom
@@ -24,11 +25,14 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 /*
-    Klasa odpowiedzalna za przekonwertowanie surowego modelu z firebase (kolekcja hotels)
-    w funkcjonalny model Hotel Single Room funckjonalny dla naszej aplikacji
-    Czyli z wszystkich danych udostepnionych przez firebase wybieramy te dane ktore sa nam potrzebne w aplikacji np. obiekt pokoj i nazwa hotelu (bez adresow itp)
-    tworzymy model ktory ma te dane nam przechowywac (HotelSingleRoom)
-    i nastepnie zapisujemy i odczytujemy dane z tego modelu
+*   Logika biznesowa
+*   findAllHotelRoom() -> zwraca cala kolekcje hotel i konwertuje na liste obiektow modelu HotelSingleRoom (wykorzystuje ja miedzy innymi HomeFragment)
+*   reserveRoom() -> przy zarezerwowaniu pokoju przez uzyrkowinka:
+*       - ustawia dostepnosc pokoju na false zeby inni uzytkownicy nie mogli go wynajac
+*       - przypisuje pokoj do uzytkownika w kolekcji user reserved rooms
+*   passTheReservedRoom() -> po wygasnieciu daty pokoju:
+*       - program automatycznie usuwa pokoj z reserved rooms uzytkownika
+*       - zaminia dostepnosc pokoju na true tak aby inni uzytkownicy mogli go wynajmywac
  */
 
 class HotelSingleRoomService @Inject constructor(
@@ -56,26 +60,16 @@ class HotelSingleRoomService @Inject constructor(
             val hotel : SingleHotel = it.toSingleHotel()
             it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(hotel, room)) }
         }
-
-        Log.d("serviceRoom", hotelSingleRoomList.toString())
     }
 
-    //funkcja ktora zmienia dostepnosc pokoju na niedostepny -> Done
-    //przypisuje pokoj do uzytkownika
-    //przypisuje date wygasniecia pokoju dla uzytkownika
     fun reserveRoom(room : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
         try {
             //changing availability value for reserved room
             val userRoom = room.room
-            val result = room.room?.let {
-                hotelRoomRepository.hotelCollection()
-                    .whereArrayContains("rooms", it)
-                    .get()
-                    .await()
-            }
+            val result = room.room?.let { hotelRoomRepository.findAllMatchingRooms(it) }
 
             result?.forEach { document ->
-                val docIdRef = hotelRoomRepository.hotelCollection().document(document.id)
+                val docIdRef = hotelRoomRepository.findHotelDocumentById(document.id)
 
                 docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
 
@@ -83,28 +77,85 @@ class HotelSingleRoomService @Inject constructor(
                 docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
             }
 
-            Log.d("SuccessAvailability", "Change success")
-
             //add room to user reservations
-            val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                LocalDateTime.now().plusDays(2)
-            } else {
-                TODO("VERSION.SDK_INT < O")
-            }
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-            val formatted = current.format(formatter)
+            val customDate = customDate()
 
-            val userReservedRooms = UserReservedRoom(user?.uid.toString(), room.hotel, userRoom, formatted).toUserRooms()
+            val userReservedRooms = UserReservedRoom(user?.uid.toString(), room.hotel, userRoom, customDate).toUserRooms()
             userRoomReservationRepository.add(userReservedRooms)
+
+            Log.d("SuccessAvailability", "Change success")
 
         }catch (e : Exception){
             Log.d("FailureAvailability", e.toString())
         }
+    }
+
+    fun passTheReservedRoom() = CoroutineScope(Dispatchers.IO).launch{
+        val currentDate = currentDate()
+
+        try {
+            val result = userRoomReservationRepository.outDatedUserReservationRooms(currentDate.toString())
+
+            //delete user reserved room
+            result?.forEach { document ->
+                val userRoom = document.toObject(UserRooms::class.java).toUserReservedRoom().userRoom
+                val innerResult = userRoom?.let { hotelRoomRepository.findAllMatchingRooms(it) }
+
+                innerResult?.forEach { document ->
+                    val docIdRef = hotelRoomRepository.findHotelDocumentById(document.id)
+
+                    docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+
+                    userRoom.availability = true
+                    docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                }
+
+                document.reference.delete()
+            }
+
+            withContext(Dispatchers.Main){
+                Log.d("successPassingUserRoom", "Passing user room finished success")
+            }
+        }catch (e : Exception){
+            withContext(Dispatchers.Main){
+                Log.d("failurePassingUserRoom", e.toString())
+            }
+        }
 
     }
 
-    fun passTheReservedRoom(userReservedRoom : UserReservedRoom) = CoroutineScope(Dispatchers.IO).launch{
+    /*
+    * funkcje odpowiedzialne za zwracanie obecnej daty
+    * oraz generowanie daty do ktorej uzytkownik musi zdac pokoj
+    * */
 
+    private fun customDate(): String? {
+        //get current date
+        val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDateTime.now().plusDays(3)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        return dateTools(current)
+    }
+
+    private fun currentDate(): String? {
+        //get current date
+        val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDateTime.now()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        return dateTools(current)
+    }
+
+    private fun dateTools(current : LocalDateTime) : String? {
+        val formatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        return current.format(formatter)
     }
 
 }

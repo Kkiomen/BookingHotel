@@ -3,6 +3,10 @@ package com.example.bookinghotel.domain.model
 import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.data.models.UserRooms
 
+/*
+* klasa zawierajaca wszystkie dane ktore potrzbuje uzytkownik przy zarezerwowaniu pokoju
+* */
+
 data class UserReservedRoom(
     val userId : String? = null,
     val userHotel: SingleHotel? = null,

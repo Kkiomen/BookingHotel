@@ -7,7 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.bookinghotel.R
+import com.example.bookinghotel.backgroundServices.CheckDateService
 import com.example.bookinghotel.databinding.MainDashboardActivityLayoutBinding
 import com.example.bookinghotel.ui.dashboard.home.HomeFragment
 import com.example.bookinghotel.ui.dashboard.reservation.ReservationFragment
@@ -16,6 +20,7 @@ import com.example.bookinghotel.ui.login.LoginFragment
 import com.example.bookinghotel.ui.register.RegisterFragment
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainDashboardActivity : AppCompatActivity() {
@@ -28,6 +33,13 @@ class MainDashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainDashboardActivityLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //workerManager
+        val repeatingRequest = PeriodicWorkRequestBuilder<CheckDateService>(1, TimeUnit.DAYS)
+            .build()
+
+        val workManager = WorkManager.getInstance(applicationContext)
+        workManager.enqueue(repeatingRequest)
 
         //startowy fragment (Home Fragment)
 //        homeFragmentTransaction = supportFragmentManager.beginTransaction()
