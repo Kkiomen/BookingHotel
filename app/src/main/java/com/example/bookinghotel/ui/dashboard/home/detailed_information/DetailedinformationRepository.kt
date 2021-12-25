@@ -8,7 +8,7 @@ class DetailedinformationRepository @Inject constructor(
     private val hotelSingleRoomService: HotelSingleRoomService
 ) {
 
-    suspend fun roomReservation(room : HotelSingleRoom){
+    fun roomReservation(room : HotelSingleRoom){
         hotelSingleRoomService.reserveRoom(room)
     }
 

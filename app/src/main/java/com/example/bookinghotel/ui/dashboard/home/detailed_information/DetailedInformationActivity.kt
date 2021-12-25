@@ -3,11 +3,16 @@ package com.example.bookinghotel.ui.dashboard.home.detailed_information
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.bookinghotel.databinding.ActivityDetailedInformationBinding
 import com.example.bookinghotel.domain.model.HotelSingleRoom
+import com.example.bookinghotel.ui.dashboard.main.MainDashboardActivity
+import com.example.bookinghotel.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DetailedInformationActivity : AppCompatActivity() {
@@ -26,6 +31,21 @@ class DetailedInformationActivity : AppCompatActivity() {
 
         binding.reservationButton.setOnClickListener{
             roomReservation()
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.reservationState.collect {
+                when(it){
+                    is DetailedInformationViewModel.ReservationState.Success -> {
+                        //TODO:: jesli uda sie zarezerwowac pokoj
+                    }
+                    is DetailedInformationViewModel.ReservationState.Error -> {
+                        //TODO:: jesli chuja sie uda a nie zarezerwowac pokoj
+                        Log.i("LOGIN ERROR", it.message)
+                    }
+                    else -> Unit
+                }
+            }
         }
     }
 

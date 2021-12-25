@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.domain.model.HotelSingleRoom
+import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -42,6 +43,8 @@ class HomeViewModel @Inject constructor(
                 .filter { hotelSingleRoom -> hotelSingleRoom.room?.availability == true }
                 .toMutableList()
 
+            Log.d("roomsViewModel", rooms.toString())
+
             withContext(Dispatchers.Main){
                 _homeState.value = HomeState.Success
             }
@@ -50,6 +53,8 @@ class HomeViewModel @Inject constructor(
                 _homeState.value = HomeState.Error(e.message.toString())
             }
         }
+
+        _homeState.value = HomeState.Empty
     }
 
 }

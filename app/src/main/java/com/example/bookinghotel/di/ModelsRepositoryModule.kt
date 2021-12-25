@@ -1,6 +1,7 @@
 package com.example.bookinghotel.di
 
 import com.example.bookinghotel.data.repostiories.HotelRoomRepository
+import com.example.bookinghotel.data.repostiories.UserReservationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,9 @@ class ModelsRepositoryModule {
     @Singleton
     @Provides
     fun provideRoomRepository() : HotelRoomRepository = HotelRoomRepository()
+
+    @Singleton
+    @Provides
+    fun provideUserReservationRoomRepository() : UserReservationRepository = UserReservationRepository()
 
 }

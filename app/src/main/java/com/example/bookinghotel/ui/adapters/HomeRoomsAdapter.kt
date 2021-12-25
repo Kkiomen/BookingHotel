@@ -14,7 +14,7 @@ import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.example.bookinghotel.ui.dashboard.home.detailed_information.DetailedInformationActivity
 
 class HomeRoomsAdapter(
-    private val roomsList: MutableList<HotelSingleRoom>
+    private var roomsList: MutableList<HotelSingleRoom>
 ) : RecyclerView.Adapter<HomeRoomsAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -47,5 +47,10 @@ class HomeRoomsAdapter(
             putExtra("HotelRoom", roomsList[holder.adapterPosition])
         }
         context.startActivity(intent)
+    }
+
+    fun setList(rooms: MutableList<HotelSingleRoom>){
+        roomsList.clear()
+        roomsList.addAll(rooms)
     }
 }

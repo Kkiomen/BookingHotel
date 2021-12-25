@@ -33,18 +33,20 @@ class HomeFragment : Fragment() {
             false
         )
 
+        viewModel.listOfHotels()
+
+        //Recycler view init
         roomsRecyclerView = binding.homeRoomsRecyclerview
         roomsRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        viewModel.listOfHotels()
+        val adapter = HomeRoomsAdapter(viewModel.rooms)
+        roomsRecyclerView.adapter = adapter
 
         lifecycleScope.launchWhenCreated {
             viewModel.homeState.collect{
                 when(it){
                     is HomeViewModel.HomeState.Success -> {
-                        //TODO:: Recycler View
-                        val adapter = HomeRoomsAdapter(viewModel.rooms)
-                        roomsRecyclerView.adapter = adapter
+                        adapter.setList(viewModel.rooms)
+                        adapter.notifyDataSetChanged()
                     }
                     is HomeViewModel.HomeState.Error -> {
                         //TODO:: Handle error on UI
