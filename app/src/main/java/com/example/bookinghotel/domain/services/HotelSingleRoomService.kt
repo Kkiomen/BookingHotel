@@ -61,11 +61,8 @@ class HotelSingleRoomService @Inject constructor(
     }
 
     //funkcja ktora zmienia dostepnosc pokoju na niedostepny -> Done
-    //TODO:: przypisuje pokoj do uzytkownika
-    //TODO:: przypisuje date wygasniecia pokoju dla uzytkownika
-    //TODO:: zaimplementowac Coroutines
-    //wersja testowa
-    @RequiresApi(Build.VERSION_CODES.O)
+    //przypisuje pokoj do uzytkownika
+    //przypisuje date wygasniecia pokoju dla uzytkownika
     fun reserveRoom(room : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
         try {
             //changing availability value for reserved room
@@ -88,7 +85,12 @@ class HotelSingleRoomService @Inject constructor(
 
             Log.d("SuccessAvailability", "Change success")
 
-            val current = LocalDateTime.now().plusDays(2)
+            //add room to user reservations
+            val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalDateTime.now().plusDays(2)
+            } else {
+                TODO("VERSION.SDK_INT < O")
+            }
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
             val formatted = current.format(formatter)
 
@@ -98,6 +100,10 @@ class HotelSingleRoomService @Inject constructor(
         }catch (e : Exception){
             Log.d("FailureAvailability", e.toString())
         }
+
+    }
+
+    fun passTheReservedRoom(userReservedRoom : UserReservedRoom) = CoroutineScope(Dispatchers.IO).launch{
 
     }
 

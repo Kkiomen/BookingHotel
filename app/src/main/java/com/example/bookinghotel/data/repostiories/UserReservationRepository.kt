@@ -21,6 +21,10 @@ class UserReservationRepository : DaoRepository{
         return collection.get(source).await()
     }
 
+    fun userReservationCollection(): CollectionReference {
+        return collection
+    }
+
     fun add(userRooms: UserRooms) {
         //collection.document(documentId).update("user_rooms", FieldValue.arrayUnion(userRooms))
         collection.add(userRooms)

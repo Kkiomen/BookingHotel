@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 //
 //        val hotel : Hotel = Hotel("Mariott", "Wojska 22", "23-224", "Warsaw", rooms)
 //
-//        Firebase.firestore.collection("hotel").document("first").set(hotel)
+//        Firebase.firestore.collection("hotel").add(hotel)
 //            .addOnSuccessListener { Log.d("success", "success") }
 //            .addOnFailureListener { Log.d("failuure", "failure") }
 
