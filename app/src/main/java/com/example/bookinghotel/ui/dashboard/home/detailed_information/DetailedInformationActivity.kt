@@ -1,7 +1,5 @@
 package com.example.bookinghotel.ui.dashboard.home.detailed_information
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -9,10 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.bookinghotel.databinding.ActivityDetailedInformationBinding
 import com.example.bookinghotel.domain.model.HotelSingleRoom
-import com.example.bookinghotel.ui.dashboard.main.MainDashboardActivity
-import com.example.bookinghotel.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+
+/*
+* Aktywnosc ktora odpowiedzialna za wyswietlenie danych o pokoju,
+* czyli danych z modelu HotelSingleRoom
+* oraz umozliwienie uzytkownikowi wynajecia pokoju
+* */
 
 @AndroidEntryPoint
 class DetailedInformationActivity : AppCompatActivity() {

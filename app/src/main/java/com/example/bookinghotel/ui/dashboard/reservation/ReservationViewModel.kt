@@ -14,6 +14,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/*
+* implementuje reservationRepository
+* udostepnia do fragmentu:
+* liste userReservedRoomList -> ktora zawiera pokoie ktore zawieraja id zalogowanego uzytkownika
+* reservationState -> ktory zwraca rezultat wykonania funkcji (czy funkcja zakonczyla sie sukcesem czy errorem)
+* listOfUserRooms() -> metoda ktora implementuje findAllUserRooms() z repozytorium
+* */
+
 @HiltViewModel
 class ReservationViewModel @Inject constructor(
     private val reservationRepository: ReservationRepository

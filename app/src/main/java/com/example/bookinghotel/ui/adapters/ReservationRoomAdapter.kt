@@ -17,6 +17,7 @@ import com.example.bookinghotel.ui.dashboard.reservation.detailed_reservation_in
 /*
 * Adapter dla Recycler View ktore znajduje sie w Reservation Fragment
 * Przyjmuje jako parametr liste UserReservedRoom
+* Po kliknieciu w item przenosi do DetailedReservationinformationActivity
 */
 
 class ReservationRoomAdapter(
