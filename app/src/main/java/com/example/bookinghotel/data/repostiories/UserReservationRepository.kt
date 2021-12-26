@@ -9,6 +9,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
+/*
+* Repozytorium dla modelu UserRooms
+* jest odpowiedzialna za operacje na tej kolekcji
+* */
+
 class UserReservationRepository : DaoRepository{
 
     private val collection = Firebase.firestore.collection("users_reservations")
@@ -32,10 +37,6 @@ class UserReservationRepository : DaoRepository{
     fun add(userRooms: UserRooms) {
         //collection.document(documentId).update("user_rooms", FieldValue.arrayUnion(userRooms))
         collection.add(userRooms)
-    }
-
-    fun userReservationCollection(): CollectionReference {
-        return collection
     }
 
 }

@@ -8,6 +8,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/*
+* Wstrzykiwanie repozytoriow odpowiedzialnych za operacje na surowych modelach (package data.repositories)
+* */
+
 @Module
 @InstallIn(SingletonComponent::class)
 class ModelsRepositoryModule {

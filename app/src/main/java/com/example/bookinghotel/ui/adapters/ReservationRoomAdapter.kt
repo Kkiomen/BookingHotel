@@ -14,6 +14,11 @@ import com.example.bookinghotel.domain.model.UserReservedRoom
 import com.example.bookinghotel.ui.dashboard.home.detailed_information.DetailedInformationActivity
 import com.example.bookinghotel.ui.dashboard.reservation.detailed_reservation_information.DetailedReservationInformationActivity
 
+/*
+* Adapter dla Recycler View ktore znajduje sie w Reservation Fragment
+* Przyjmuje jako parametr liste UserReservedRoom
+*/
+
 class ReservationRoomAdapter(
     private var roomsList: List<UserReservedRoom>
     ) : RecyclerView.Adapter<ReservationRoomAdapter.ViewHolder>() {

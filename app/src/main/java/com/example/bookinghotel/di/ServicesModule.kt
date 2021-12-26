@@ -10,6 +10,10 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/*
+* Wstrzykiwanie serwisu odpowiedzialnego za cala logike aplikacji
+* */
+
 @Module
 @InstallIn(ActivityComponent::class)
 class ServicesModule {

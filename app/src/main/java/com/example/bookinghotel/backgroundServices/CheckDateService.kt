@@ -18,6 +18,7 @@ import javax.inject.Inject
 /*
 * Klasa odpowiedzialna za sprawdzanie daty zarezerwowanego pokoju
 * i jesli jest przedawniona usuwa pokoj z zarezerwowanych pokoi uzytkownika
+* system wywoluje funkcje 1 raz dziennie
 * */
 
 class CheckDateService(

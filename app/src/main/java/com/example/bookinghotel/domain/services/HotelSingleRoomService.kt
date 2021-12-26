@@ -27,7 +27,7 @@ import javax.inject.Inject
 /*
 *   Logika biznesowa
 *   findAllHotelRoom() -> zwraca cala kolekcje hotel i konwertuje na liste obiektow modelu HotelSingleRoom (wykorzystuje ja miedzy innymi HomeFragment)
-*   findAllUserRooms() -> to samo co wczesniejsza tylko zwraca wszystkie zarezerwowane pokoje uzytkownika
+*   findAllUserRooms() -> to samo co funkcja wyzej tylko zwraca wszystkie zarezerwowane pokoje uzytkownika
 *   reserveRoom() -> przy zarezerwowaniu pokoju przez uzyrkowinka:
 *       - ustawia dostepnosc pokoju na false zeby inni uzytkownicy nie mogli go wynajac
 *       - przypisuje pokoj do uzytkownika w kolekcji user reserved rooms
@@ -91,12 +91,14 @@ class HotelSingleRoomService @Inject constructor(
             val result = room.room?.let { hotelRoomRepository.findAllMatchingRooms(it) }
 
             result?.forEach { document ->
-                val docIdRef = hotelRoomRepository.findHotelDocumentById(document.id)
+                val docIdRef = hotelRoomRepository.findById(document.id)?.reference
 
-                docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+                docIdRef?.let {
+                    docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
 
-                userRoom?.availability = false
-                docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                    userRoom?.availability = false
+                    docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                }
             }
 
             //add room to user reservations
@@ -127,12 +129,14 @@ class HotelSingleRoomService @Inject constructor(
                 val innerResult = userRoom?.let { hotelRoomRepository.findAllMatchingRooms(it) }
 
                 innerResult?.forEach { document ->
-                    val docIdRef = hotelRoomRepository.findHotelDocumentById(document.id)
+                    val docIdRef = hotelRoomRepository.findById(document.id)?.reference
 
-                    docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+                    docIdRef?.let {
+                        docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
 
-                    userRoom.availability = true
-                    docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                        userRoom.availability = true
+                        docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                    }
                 }
 
                 document.reference.delete()
@@ -150,8 +154,7 @@ class HotelSingleRoomService @Inject constructor(
     }
 
     /*
-    * funkcje odpowiedzialne za zwracanie obecnej daty
-    * oraz generowanie daty do ktorej uzytkownik musi zdac pokoj
+    * funkcja odpowiedzialna za generowanie klucza
     * */
 
     private fun generateKey(): String {
@@ -160,6 +163,11 @@ class HotelSingleRoomService @Inject constructor(
             .map(allowedChars::get)
             .joinToString("");
     }
+
+    /*
+    * funkcje odpowiedzialne za zwracanie obecnej daty
+    * oraz generowanie daty do ktorej uzytkownik musi zdac pokoj
+    * */
 
     private fun customDate(): String? {
         //get current date

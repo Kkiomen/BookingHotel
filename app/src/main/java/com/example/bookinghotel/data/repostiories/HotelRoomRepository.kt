@@ -6,6 +6,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
+/*
+* Repozytorium dla modeli Hotel i Room
+* jest odpowiedzialna za operacje na tych kolekcjach
+* */
+
 class HotelRoomRepository : DaoRepository{
 
     private val collection = Firebase.firestore.collection("hotel")
@@ -35,10 +40,6 @@ class HotelRoomRepository : DaoRepository{
 
     fun add(documentId : Int): DocumentReference {
         return collection.document(documentId.toString())
-    }
-
-    fun findHotelDocumentById(documentId: String): DocumentReference {
-        return collection.document(documentId)
     }
 
 }

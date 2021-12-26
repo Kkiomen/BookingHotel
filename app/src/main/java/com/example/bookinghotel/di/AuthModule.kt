@@ -9,6 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/*
+* Wstrzykiwanie repozytoriów, ktore podlaczone sa do aktywnosci
+* koter zajmuja sie autoryzacja, czyli np. logowanie, rejestracja*/
+
 @Module
 @InstallIn(SingletonComponent::class)
 class AuthModule {

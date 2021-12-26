@@ -10,6 +10,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/*
+* Wstrzykiwanie repozytoriow ktore potrzebne sa w viewModelu
+* */
+
 @Module
 @InstallIn(SingletonComponent::class)
 class ViewModelRepositoryModule {

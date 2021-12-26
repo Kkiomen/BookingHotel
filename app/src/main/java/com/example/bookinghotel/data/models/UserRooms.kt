@@ -3,6 +3,10 @@ package com.example.bookinghotel.data.models
 import com.example.bookinghotel.domain.model.SingleHotel
 import com.example.bookinghotel.domain.model.UserReservedRoom
 
+/*
+* Surowy model dla danych z firebase
+* */
+
 data class UserRooms(
     val userId : String? = null,
     val name: String? = null,

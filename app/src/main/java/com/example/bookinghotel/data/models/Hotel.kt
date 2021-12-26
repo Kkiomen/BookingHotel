@@ -2,6 +2,10 @@ package com.example.bookinghotel.data.models
 
 import com.example.bookinghotel.domain.model.SingleHotel
 
+/*
+* Surowy model dla danych z firebase
+* */
+
 data class Hotel(
     val name: String? = null,
     val address1: String? = null,

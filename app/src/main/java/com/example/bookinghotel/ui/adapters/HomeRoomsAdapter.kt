@@ -13,6 +13,11 @@ import com.example.bookinghotel.databinding.HomeRvAdapterBinding
 import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.example.bookinghotel.ui.dashboard.home.detailed_information.DetailedInformationActivity
 
+/*
+* Adapter dla Recycler View ktore znajduje sie w Home Fragment
+* Przyjmuje jako parametr liste HotelSingleRoom
+*/
+
 class HomeRoomsAdapter(
     private var roomsList: MutableList<HotelSingleRoom>
 ) : RecyclerView.Adapter<HomeRoomsAdapter.ViewHolder>() {
