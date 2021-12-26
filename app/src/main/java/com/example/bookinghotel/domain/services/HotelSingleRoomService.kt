@@ -2,7 +2,10 @@ package com.example.bookinghotel.domain.services
 
 import android.os.Build
 import android.util.Log
-import com.example.bookinghotel.data.models.*
+import com.example.bookinghotel.data.models.Hotel
+import com.example.bookinghotel.data.models.Room
+import com.example.bookinghotel.data.models.UserRooms
+import com.example.bookinghotel.data.models.toUserReservedRoom
 import com.example.bookinghotel.data.repostiories.HotelRepository
 import com.example.bookinghotel.data.repostiories.RoomRepository
 import com.example.bookinghotel.data.repostiories.UserReservationRepository
@@ -10,7 +13,6 @@ import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.example.bookinghotel.domain.model.UserReservedRoom
 import com.example.bookinghotel.domain.model.toUserRooms
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -130,10 +132,7 @@ class HotelSingleRoomService @Inject constructor(
                 hotelDocumentResult?.forEach { hotelDocument ->
                     innerResult?.forEach { roomDocument ->
                         val docIdRef = roomRepository.findById(hotelDocument.id, roomDocument.id)?.reference
-
-                        docIdRef?.let {
-                            docIdRef.set(userReservationRoom)
-                        }
+                        docIdRef?.let { docIdRef.set(userReservationRoom.userRoom) }
                     }
                 }
 
@@ -159,7 +158,7 @@ class HotelSingleRoomService @Inject constructor(
         val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
         return (1..10).map { i -> kotlin.random.Random.nextInt(0, allowedChars.size) }
             .map(allowedChars::get)
-            .joinToString("");
+            .joinToString("")
     }
 
     /*
