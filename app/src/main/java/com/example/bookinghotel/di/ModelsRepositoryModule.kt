@@ -1,6 +1,7 @@
 package com.example.bookinghotel.di
 
-import com.example.bookinghotel.data.repostiories.HotelRoomRepository
+import com.example.bookinghotel.data.repostiories.HotelRepository
+import com.example.bookinghotel.data.repostiories.RoomRepository
 import com.example.bookinghotel.data.repostiories.UserReservationRepository
 import dagger.Module
 import dagger.Provides
@@ -18,10 +19,14 @@ class ModelsRepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRoomRepository() : HotelRoomRepository = HotelRoomRepository()
+    fun provideHotelRepository() : HotelRepository = HotelRepository()
 
     @Singleton
     @Provides
     fun provideUserReservationRoomRepository() : UserReservationRepository = UserReservationRepository()
+
+    @Singleton
+    @Provides
+    fun provideRoomRepository() : RoomRepository = RoomRepository()
 
 }

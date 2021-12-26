@@ -17,14 +17,13 @@ import kotlinx.coroutines.tasks.await
 class UserReservationRepository : DaoRepository{
 
     private val collection = Firebase.firestore.collection("users_reservations")
-    private val source = Source.CACHE
 
     override suspend fun findById(documentId : String): DocumentSnapshot? {
-        return collection.document(documentId).get(source).await()
+        return collection.document(documentId).get().await()
     }
 
     override suspend fun findAll(): QuerySnapshot? {
-        return collection.get(source).await()
+        return collection.get().await()
     }
 
     suspend fun outDatedUserReservationRooms(currentDate : String): QuerySnapshot? {

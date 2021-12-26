@@ -1,6 +1,5 @@
 package com.example.bookinghotel.data.models
 
-import com.example.bookinghotel.domain.model.SingleHotel
 import com.example.bookinghotel.domain.model.UserReservedRoom
 
 /*
@@ -23,7 +22,7 @@ data class UserRooms(
 
 fun UserRooms.toUserReservedRoom() : UserReservedRoom = UserReservedRoom(
     userId = userId,
-    userHotel = SingleHotel(name, address1, address2, address3),
+    userHotel = Hotel(name, address1, address2, address3),
     userRoom = Room(description, availability, number, persons),
     generated_key = generated_key,
     expirationDate = expirationDate

@@ -2,14 +2,11 @@ package com.example.bookinghotel.domain.services
 
 import android.os.Build
 import android.util.Log
-import com.example.bookinghotel.data.models.Hotel
-import com.example.bookinghotel.data.models.UserRooms
-import com.example.bookinghotel.data.models.toSingleHotel
-import com.example.bookinghotel.data.models.toUserReservedRoom
-import com.example.bookinghotel.data.repostiories.HotelRoomRepository
+import com.example.bookinghotel.data.models.*
+import com.example.bookinghotel.data.repostiories.HotelRepository
+import com.example.bookinghotel.data.repostiories.RoomRepository
 import com.example.bookinghotel.data.repostiories.UserReservationRepository
 import com.example.bookinghotel.domain.model.HotelSingleRoom
-import com.example.bookinghotel.domain.model.SingleHotel
 import com.example.bookinghotel.domain.model.UserReservedRoom
 import com.example.bookinghotel.domain.model.toUserRooms
 import com.google.firebase.auth.FirebaseAuth
@@ -18,7 +15,6 @@ import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -37,34 +33,34 @@ import javax.inject.Inject
  */
 
 class HotelSingleRoomService @Inject constructor(
-    private val hotelRoomRepository: HotelRoomRepository,
+    private val hotelRepository: HotelRepository,
+    private val roomRepository: RoomRepository,
     private val userReservationRepository: UserReservationRepository
 ) {
 
     private val user = FirebaseAuth.getInstance().currentUser
 
-    private val hotels : MutableList<Hotel> = mutableListOf()
     private val userRooms : MutableList<UserRooms> = mutableListOf()
+
     val hotelSingleRoomList : MutableList<HotelSingleRoom> = mutableListOf()
     var userReservedRoomList : MutableList<UserReservedRoom> = mutableListOf()
 
     suspend fun findAllHotelRooms() = withContext(Dispatchers.IO) {
-
-        if(hotels.isNotEmpty())                 hotels.clear()
         if(hotelSingleRoomList.isNotEmpty())    hotelSingleRoomList.clear()
 
-        val documents = hotelRoomRepository.findAll()?.documents
+        val hotelDocuments = hotelRepository.findAll()?.documents
 
-        documents?.forEach{
-            it.toObject<Hotel>()?.let { it1 -> hotels.add(it1) }
+        hotelDocuments?.forEach{ hotelDocument ->
+            val hotel = hotelDocument.toObject<Hotel>()
+            val roomDocuments = roomRepository.findAll(hotelDocument.id)?.documents
+
+            roomDocuments?.forEach { roomDocument ->
+                val room = roomDocument.toObject<Room>()
+                hotelSingleRoomList.add(HotelSingleRoom(hotel, room))
+            }
         }
 
-        hotels.forEach{
-            val hotel : SingleHotel = it.toSingleHotel()
-            it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(hotel, room)) }
-        }
-
-        Log.d("hotels", hotels.toString())
+        Log.d("hotels", hotelSingleRoomList.toString())
     }
 
     suspend fun findAllUserRooms() = withContext(Dispatchers.IO){
@@ -84,20 +80,20 @@ class HotelSingleRoomService @Inject constructor(
         Log.d("iduser", user?.uid.toString())
     }
 
-    fun reserveRoom(room : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
+    fun reserveRoom(hotelSingleRoom : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
         try {
             //changing availability value for reserved room
-            val userRoom = room.room
-            val result = room.room?.let { hotelRoomRepository.findAllMatchingRooms(it) }
+            val userRoom = hotelSingleRoom.room
 
-            result?.forEach { document ->
-                val docIdRef = hotelRoomRepository.findById(document.id)?.reference
+            val roomsDocumentsResult = roomRepository.findAllMatchingRooms(hotelSingleRoom.hotel!!, userRoom!!)
+            val hotelDocumentResult = hotelRepository.findSingleHotel(hotelSingleRoom.hotel)
 
-                docIdRef?.let {
-                    docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+            userRoom.availability = false
 
-                    userRoom?.availability = false
-                    docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+            hotelDocumentResult?.forEach { hotelDocument ->
+                roomsDocumentsResult?.forEach { roomDocument ->
+                    val docIdRef = roomRepository.findById(hotelDocument.id, roomDocument.id)?.reference
+                    docIdRef?.let { docIdRef.set(userRoom) }
                 }
             }
 
@@ -105,7 +101,7 @@ class HotelSingleRoomService @Inject constructor(
             val customDate = customDate()
             val generateKey = generateKey()
 
-            val userReservedRooms = UserReservedRoom(user?.uid.toString(), room.hotel, userRoom, generateKey, customDate).toUserRooms()
+            val userReservedRooms = UserReservedRoom(user?.uid.toString(), hotelSingleRoom.hotel, userRoom, generateKey, customDate).toUserRooms()
             userReservationRepository.add(userReservedRooms)
 
             Log.d("SuccessAvailability", "Change success")
@@ -125,17 +121,19 @@ class HotelSingleRoomService @Inject constructor(
 
             //delete user reserved room
             result?.forEach { document ->
-                val userRoom = document.toObject(UserRooms::class.java).toUserReservedRoom().userRoom
-                val innerResult = userRoom?.let { hotelRoomRepository.findAllMatchingRooms(it) }
+                val userReservationRoom = document.toObject(UserRooms::class.java).toUserReservedRoom()
+                val innerResult = roomRepository.findAllMatchingRooms(userReservationRoom.userHotel!!, userReservationRoom.userRoom!!)
+                val hotelDocumentResult = hotelRepository.findSingleHotel(userReservationRoom.userHotel)
 
-                innerResult?.forEach { document ->
-                    val docIdRef = hotelRoomRepository.findById(document.id)?.reference
+                userReservationRoom.userRoom.availability = true
 
-                    docIdRef?.let {
-                        docIdRef.update("rooms", FieldValue.arrayRemove(userRoom)).await()
+                hotelDocumentResult?.forEach { hotelDocument ->
+                    innerResult?.forEach { roomDocument ->
+                        val docIdRef = roomRepository.findById(hotelDocument.id, roomDocument.id)?.reference
 
-                        userRoom.availability = true
-                        docIdRef.update("rooms", FieldValue.arrayUnion(userRoom))
+                        docIdRef?.let {
+                            docIdRef.set(userReservationRoom)
+                        }
                     }
                 }
 

@@ -1,5 +1,6 @@
 package com.example.bookinghotel.domain.model
 
+import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.data.models.UserRooms
 import java.io.Serializable
@@ -10,7 +11,7 @@ import java.io.Serializable
 
 data class UserReservedRoom(
     val userId : String? = null,
-    val userHotel: SingleHotel? = null,
+    val userHotel: Hotel? = null,
     val userRoom: Room? = null,
     val generated_key : String? = null,
     val expirationDate: String? = null

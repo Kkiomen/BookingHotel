@@ -30,16 +30,21 @@ class MainActivity : AppCompatActivity() {
 //        rooms.add(Room("pierdole wasze matki", true, "17", "3"))
 //        rooms.add(Room("Zydzi do pieca", true, "24", "4"))
 //
-//        val hotel : Hotel = Hotel("Mariott", "Wojska 22", "23-224", "Warsaw", rooms)
+//        val hotel : Hotel = Hotel("Mariott", "Wojska 22", "23-224", "Warsaw")
 //
 //        Firebase.firestore.collection("hotel").add(hotel)
-//            .addOnSuccessListener { Log.d("success", "success") }
+//            .addOnSuccessListener {
+//                rooms.forEach{ room ->
+//                    it.collection("rooms").add(room)
+//                }
+//                Log.d("success", "success")
+//            }
 //            .addOnFailureListener { Log.d("failuure", "failure") }
 
         if(savedInstanceState == null){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.login_panel, LoginFragment())
-                .replace(R.id.register_panel, RegisterFragment())
+                //.replace(R.id.register_panel, RegisterFragment())
                 .commit()
         }
     }

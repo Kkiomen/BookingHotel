@@ -1,5 +1,6 @@
 package com.example.bookinghotel.domain.model
 
+import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.Room
 import java.io.Serializable
 
@@ -9,6 +10,6 @@ import java.io.Serializable
 * tylko te dane ktore sa nam potrzebne do programu dzieki czemu obiekt zajmuje mniej miejsca i zawiera wszystkie potrzebne nam dane*/
 
 data class HotelSingleRoom (
-    val hotel : SingleHotel? = null,
+    val hotel : Hotel? = null,
     val room : Room? = null
 ): Serializable
