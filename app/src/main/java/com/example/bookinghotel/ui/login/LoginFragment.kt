@@ -19,6 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlin.math.log
 
+/*
+* Fragment ma takie funkcjonalnosci:
+* - logowanie uzytkownika do systemu
+* Fragment implementuje dwa editTexty
+* */
+
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 

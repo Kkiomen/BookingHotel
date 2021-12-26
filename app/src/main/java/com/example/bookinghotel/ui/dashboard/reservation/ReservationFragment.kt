@@ -17,6 +17,14 @@ import com.example.bookinghotel.ui.dashboard.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+/*
+* Fragment ma takie funkcjonalnosci:
+* - wyswietlic liste pokoji ktore zarezerwowal uzytkownik
+* - po wybraniu pokoju przeniesc do DetailedReservationInformtionActivity
+* Fragment implementuje recyclerView
+* adapterem recyclerView jest ReservationRoomAdapter
+* */
+
 @AndroidEntryPoint
 class ReservationFragment : Fragment() {
 

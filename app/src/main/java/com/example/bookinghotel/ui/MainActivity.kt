@@ -13,6 +13,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
+/*
+* aktywnosc od ktorej startuje aplikacja
+* TODO:: zaimplementowac zeby przed ta aktywnoscia byl jeszcze splash screen
+*  */
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

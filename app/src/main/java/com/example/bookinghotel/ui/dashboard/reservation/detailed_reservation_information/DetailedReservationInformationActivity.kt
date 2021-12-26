@@ -9,6 +9,11 @@ import com.example.bookinghotel.domain.model.HotelSingleRoom
 import com.example.bookinghotel.domain.model.UserReservedRoom
 import dagger.hilt.android.AndroidEntryPoint
 
+/*
+* Aktywnosc ktora odpowiedzialna za wyswietlenie danych zarezerwowanego przez uzytkownika pokoju,
+* czyli danych z modelu UserReservedRoom
+* */
+
 @AndroidEntryPoint
 class DetailedReservationInformationActivity : AppCompatActivity() {
     private val viewModel : DetailedReservationInformationViewModel by viewModels()

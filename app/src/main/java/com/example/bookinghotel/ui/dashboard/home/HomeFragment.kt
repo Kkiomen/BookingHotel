@@ -16,6 +16,14 @@ import com.example.bookinghotel.ui.adapters.HomeRoomsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+/*
+* Fragment ma takie funkcjonalnosci:
+* - wyswietlic liste pokoji ktore sa mozliwe do wynajecia
+* - po wybraniu pokoju przeniesc do DetailedInformtionActivity
+* Fragment implementuje recyclerView
+* adapterem recyclerView jest HoomRoomsAdapter
+* */
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 

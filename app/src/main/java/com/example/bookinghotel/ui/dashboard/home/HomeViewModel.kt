@@ -16,6 +16,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/*
+* implementuje homeRepository
+* udostepnia do fragmentu:
+* liste rooms -> ktora zawiera pokoie o wartosci pola availibility == true
+* homeState -> ktory zwraca rezultat wykonania funkcji (czy funkcja zakonczyla sie sukcesem czy errorem)
+* listOfHotels() -> metoda ktora implementuje findAllHotelsWithRooms() z repozytorium
+* */
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository

@@ -17,6 +17,12 @@ import com.example.bookinghotel.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+/*
+* Fragment ma takie funkcjonalnosci:
+* - rejestracje uzytkownika do systemu
+* Fragment implementuje dwa editText
+* */
+
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 

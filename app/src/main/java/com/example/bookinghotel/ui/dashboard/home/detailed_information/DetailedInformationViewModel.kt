@@ -13,6 +13,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/*
+* Przyjmuje jako parametr repozytorium
+* udostepnia dla aktywnosci pola reservationState ktore zwraca czy funkcja wykonala sie poprawnie czy nie
+* hotelRoom czyli pokoj ktory jest mozliwy do wynajecia
+* oraz metode roomReservaiton() -> ktora jest odpowiedzialna za wynajecie pokoju przez uzytkownika
+* wszytkie te pola i metoda sa wykorzystywane w aktywnosci
+* */
+
 @HiltViewModel
 class DetailedInformationViewModel @Inject constructor(
     private val detailedinformationRepository: DetailedinformationRepository

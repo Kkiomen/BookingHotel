@@ -16,6 +16,7 @@ import com.example.bookinghotel.ui.dashboard.home.detailed_information.DetailedI
 /*
 * Adapter dla Recycler View ktore znajduje sie w Home Fragment
 * Przyjmuje jako parametr liste HotelSingleRoom
+* Po kliknieciu w item przenosi do DetailedInformationActivity
 */
 
 class HomeRoomsAdapter(

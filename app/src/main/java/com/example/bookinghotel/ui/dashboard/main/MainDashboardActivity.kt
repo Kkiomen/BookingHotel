@@ -22,6 +22,13 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
+/*
+* Glowna aktywnosc aplikacji
+* zawiera bottom menu
+* wybiera fragmenty ktore maja sie wyswietlic (HomeFragment, ReservationFragment, SettingsFragment, ProfileFragment)
+* TODO:: stworzyc ProfileFragment,  ProfileRepository, ProfileViewModel
+*  */
+
 @AndroidEntryPoint
 class MainDashboardActivity : AppCompatActivity() {
 
