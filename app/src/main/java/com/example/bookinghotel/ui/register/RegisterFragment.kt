@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,7 +25,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var emailEditText : EditText
     private lateinit var passwordEditText : EditText
-    private lateinit var registerButton : Button
+    private lateinit var registerButton : AppCompatButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         registerBinding = DataBindingUtil.inflate(
