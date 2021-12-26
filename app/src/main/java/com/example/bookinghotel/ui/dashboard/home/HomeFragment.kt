@@ -33,12 +33,10 @@ class HomeFragment : Fragment() {
             false
         )
 
-        viewModel.listOfHotels()
-
         //Recycler view init
+        val adapter = HomeRoomsAdapter(viewModel.rooms)
         roomsRecyclerView = binding.homeRoomsRecyclerview
         roomsRecyclerView.layoutManager = LinearLayoutManager(context)
-        val adapter = HomeRoomsAdapter(viewModel.rooms)
         roomsRecyclerView.adapter = adapter
 
         lifecycleScope.launchWhenCreated {
@@ -57,6 +55,12 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.listOfHotels()
     }
 
 }

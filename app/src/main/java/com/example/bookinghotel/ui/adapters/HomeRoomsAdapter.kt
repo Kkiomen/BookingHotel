@@ -50,7 +50,6 @@ class HomeRoomsAdapter(
     }
 
     fun setList(rooms: MutableList<HotelSingleRoom>){
-        roomsList.clear()
-        roomsList.addAll(rooms)
+        roomsList = rooms
     }
 }

@@ -27,6 +27,7 @@ import javax.inject.Inject
 /*
 *   Logika biznesowa
 *   findAllHotelRoom() -> zwraca cala kolekcje hotel i konwertuje na liste obiektow modelu HotelSingleRoom (wykorzystuje ja miedzy innymi HomeFragment)
+*   findAllUserRooms() -> to samo co wczesniejsza tylko zwraca wszystkie zarezerwowane pokoje uzytkownika
 *   reserveRoom() -> przy zarezerwowaniu pokoju przez uzyrkowinka:
 *       - ustawia dostepnosc pokoju na false zeby inni uzytkownicy nie mogli go wynajac
 *       - przypisuje pokoj do uzytkownika w kolekcji user reserved rooms
@@ -37,13 +38,15 @@ import javax.inject.Inject
 
 class HotelSingleRoomService @Inject constructor(
     private val hotelRoomRepository: HotelRoomRepository,
-    private val userRoomReservationRepository: UserReservationRepository
+    private val userReservationRepository: UserReservationRepository
 ) {
 
     private val user = FirebaseAuth.getInstance().currentUser
 
     private val hotels : MutableList<Hotel> = mutableListOf()
+    private val userRooms : MutableList<UserRooms> = mutableListOf()
     val hotelSingleRoomList : MutableList<HotelSingleRoom> = mutableListOf()
+    var userReservedRoomList : MutableList<UserReservedRoom> = mutableListOf()
 
     suspend fun findAllHotelRooms() = withContext(Dispatchers.IO) {
 
@@ -60,6 +63,25 @@ class HotelSingleRoomService @Inject constructor(
             val hotel : SingleHotel = it.toSingleHotel()
             it.rooms?.forEach { room -> hotelSingleRoomList.add(HotelSingleRoom(hotel, room)) }
         }
+
+        Log.d("hotels", hotels.toString())
+    }
+
+    suspend fun findAllUserRooms() = withContext(Dispatchers.IO){
+
+        if(userRooms.isNotEmpty())              userRooms.clear()
+        if(userReservedRoomList.isNotEmpty())   userReservedRoomList.clear()
+
+        val documents = userReservationRepository.findAll()?.documents
+
+        documents?.forEach{
+            it.toObject<UserRooms>()?.let { it1 -> userRooms.add(it1) }
+        }
+
+        userRooms.forEach{ tempUserRooms -> userReservedRoomList.add(tempUserRooms.toUserReservedRoom()) }
+
+        Log.d("userReservedRooms", userReservedRoomList.toString())
+        Log.d("iduser", user?.uid.toString())
     }
 
     fun reserveRoom(room : HotelSingleRoom) = CoroutineScope(Dispatchers.IO).launch{
@@ -79,9 +101,10 @@ class HotelSingleRoomService @Inject constructor(
 
             //add room to user reservations
             val customDate = customDate()
+            val generateKey = generateKey()
 
-            val userReservedRooms = UserReservedRoom(user?.uid.toString(), room.hotel, userRoom, customDate).toUserRooms()
-            userRoomReservationRepository.add(userReservedRooms)
+            val userReservedRooms = UserReservedRoom(user?.uid.toString(), room.hotel, userRoom, generateKey, customDate).toUserRooms()
+            userReservationRepository.add(userReservedRooms)
 
             Log.d("SuccessAvailability", "Change success")
 
@@ -94,7 +117,9 @@ class HotelSingleRoomService @Inject constructor(
         val currentDate = currentDate()
 
         try {
-            val result = userRoomReservationRepository.outDatedUserReservationRooms(currentDate.toString())
+            val result = userReservationRepository.outDatedUserReservationRooms(currentDate.toString())
+
+            Log.d("resultSize", result?.size().toString())
 
             //delete user reserved room
             result?.forEach { document ->
@@ -128,6 +153,13 @@ class HotelSingleRoomService @Inject constructor(
     * funkcje odpowiedzialne za zwracanie obecnej daty
     * oraz generowanie daty do ktorej uzytkownik musi zdac pokoj
     * */
+
+    private fun generateKey(): String {
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        return (1..10).map { i -> kotlin.random.Random.nextInt(0, allowedChars.size) }
+            .map(allowedChars::get)
+            .joinToString("");
+    }
 
     private fun customDate(): String? {
         //get current date

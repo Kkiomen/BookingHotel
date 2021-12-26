@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 //        val rooms : MutableList<Room> = mutableListOf()
-//        rooms.add(Room("Najpiekniejszy widok ugulem", true, "&6*K&J^*gns#", "14", "2"))
-//        rooms.add(Room("pierdole wasze matki", false, "&hkjfsdjk^&%^&*gns#", "17", "3"))
-//        rooms.add(Room("Zydzi do pieca", true, "HDJKS^*^&*()&*(DSA#", "24", "4"))
+//        rooms.add(Room("Najpiekniejszy widok ugulem", true, "14", "2"))
+//        rooms.add(Room("pierdole wasze matki", true, "17", "3"))
+//        rooms.add(Room("Zydzi do pieca", true, "24", "4"))
 //
 //        val hotel : Hotel = Hotel("Mariott", "Wojska 22", "23-224", "Warsaw", rooms)
 //

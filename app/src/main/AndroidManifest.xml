@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".ui.dashboard.home.detailed_information.DetailedInformationActivity">
         </activity>
+        <activity android:name=".ui.dashboard.reservation.detailed_reservation_information.DetailedReservationInformationActivity">
+        </activity>
     </application>
 
 </manifest>

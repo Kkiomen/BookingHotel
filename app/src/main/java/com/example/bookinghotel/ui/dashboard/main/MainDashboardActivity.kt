@@ -67,7 +67,7 @@ class MainDashboardActivity : AppCompatActivity() {
                     homeFragmentTransaction
                         .replace(binding.homePanel.id, ReservationFragment())
 
-                    Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "RESERVATION", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_like -> {
                     Toast.makeText(this, "LIKES PAGE", Toast.LENGTH_SHORT).show()

@@ -1,9 +1,9 @@
 package com.example.bookinghotel.di
 
-import com.example.bookinghotel.data.repostiories.HotelRoomRepository
 import com.example.bookinghotel.domain.services.HotelSingleRoomService
 import com.example.bookinghotel.ui.dashboard.home.HomeRepository
 import com.example.bookinghotel.ui.dashboard.home.detailed_information.DetailedinformationRepository
+import com.example.bookinghotel.ui.dashboard.reservation.ReservationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +21,10 @@ class ViewModelRepositoryModule {
     @Singleton
     @Provides
     fun provideDetailedinformationRepository(hotelSingleRoomService: HotelSingleRoomService) : DetailedinformationRepository = DetailedinformationRepository(hotelSingleRoomService)
+
+    @Singleton
+    @Provides
+    fun provideReservationRepository(hotelSingleRoomService: HotelSingleRoomService) : ReservationRepository = ReservationRepository(hotelSingleRoomService)
+
 
 }

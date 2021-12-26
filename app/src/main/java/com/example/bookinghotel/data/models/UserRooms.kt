@@ -19,7 +19,8 @@ data class UserRooms(
 
 fun UserRooms.toUserReservedRoom() : UserReservedRoom = UserReservedRoom(
     userId = userId,
-    SingleHotel(name, address1, address2, address3),
-    Room(description, availability, generated_key, number, persons),
-    expirationDate
+    userHotel = SingleHotel(name, address1, address2, address3),
+    userRoom = Room(description, availability, number, persons),
+    generated_key = generated_key,
+    expirationDate = expirationDate
 )

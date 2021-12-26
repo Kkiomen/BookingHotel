@@ -43,7 +43,8 @@ class HomeViewModel @Inject constructor(
                 .filter { hotelSingleRoom -> hotelSingleRoom.room?.availability == true }
                 .toMutableList()
 
-            Log.d("roomsViewModel", rooms.toString())
+
+            Log.d("hotels", rooms.toString())
 
             withContext(Dispatchers.Main){
                 _homeState.value = HomeState.Success

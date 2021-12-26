@@ -20,7 +20,7 @@ class DetailedReservationInformationActivity : AppCompatActivity() {
         binding = ActivityReservationDetailedInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.userReservedRoom = (intent.getSerializableExtra("UserRoom") as UserReservedRoom?)!!
+        viewModel.userReservedRoom = intent.getSerializableExtra("UserRoom") as UserReservedRoom
 
         binding.testTextView.text = viewModel.userReservedRoom.toString()
     }
