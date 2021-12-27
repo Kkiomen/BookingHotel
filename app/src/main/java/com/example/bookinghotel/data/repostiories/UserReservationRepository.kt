@@ -34,7 +34,6 @@ class UserReservationRepository : DaoRepository{
     }
 
     fun add(userRooms: UserRooms) {
-        //collection.document(documentId).update("user_rooms", FieldValue.arrayUnion(userRooms))
         collection.add(userRooms)
     }
 
