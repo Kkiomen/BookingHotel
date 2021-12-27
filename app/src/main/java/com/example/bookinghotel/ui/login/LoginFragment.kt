@@ -6,19 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.bookinghotel.R
 import com.example.bookinghotel.databinding.FragmentLoginBinding
 import com.example.bookinghotel.ui.dashboard.main.MainDashboardActivity
+import com.example.bookinghotel.ui.register.RegisterFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlin.math.log
+
 
 /*
 * Fragment ma takie funkcjonalnosci:
@@ -34,6 +37,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var emailEditText : EditText
     private lateinit var passwordEditText : EditText
+    private lateinit var register: TextView
     private lateinit var loginButton : AppCompatButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,6 +50,7 @@ class LoginFragment : Fragment() {
 
         emailEditText = loginBinding.emailLoginEditText
         passwordEditText = loginBinding.passwordLoginEditText
+        register = loginBinding.RegisterReferencept2
         loginButton = loginBinding.loginBuutton
 
         loginButton.setOnClickListener(View.OnClickListener {
@@ -54,6 +59,14 @@ class LoginFragment : Fragment() {
 
             loginViewModel.loginUser()
         });
+
+        register.setOnClickListener{
+            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.login_panel, RegisterFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         lifecycleScope.launchWhenCreated {
             loginViewModel.loginState.collect {
