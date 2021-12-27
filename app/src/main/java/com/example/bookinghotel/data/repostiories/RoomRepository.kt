@@ -6,6 +6,12 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 
+/*
+* Repozytorium dla modelu Room
+* Repozytorium dziedziczy po HotelRepository
+* jest odpowiedzialna za operacje na tej kolekcji
+* */
+
 class RoomRepository : HotelRepository() {
 
     suspend fun findById(hotelDocument: String, roomDocument : String): DocumentSnapshot? {

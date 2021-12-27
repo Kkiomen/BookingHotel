@@ -27,11 +27,11 @@ import javax.inject.Inject
 *   findAllHotelRoom() -> zwraca cala kolekcje hotel i konwertuje na liste obiektow modelu HotelSingleRoom (wykorzystuje ja miedzy innymi HomeFragment)
 *   findAllUserRooms() -> to samo co funkcja wyzej tylko zwraca wszystkie zarezerwowane pokoje uzytkownika
 *   reserveRoom() -> przy zarezerwowaniu pokoju przez uzyrkowinka:
-*       - ustawia dostepnosc pokoju na false zeby inni uzytkownicy nie mogli go wynajac
-*       - przypisuje pokoj do uzytkownika w kolekcji user reserved rooms
+*       - ustawia dostepnosc pokoju na false w kolekcji hotel -> rooms (firebase) zeby inni uzytkownicy nie mogli go zobaczyc/wynajac
+*       - przypisuje pokoj do uzytkownika w kolekcji users_reserved (firebase)
 *   passTheReservedRoom() -> po wygasnieciu daty pokoju:
-*       - program automatycznie usuwa pokoj z reserved rooms uzytkownika
-*       - zaminia dostepnosc pokoju na true tak aby inni uzytkownicy mogli go wynajmywac
+*       - program automatycznie usuwa pokoj z kolekcji users_reserved w firebase uzytkownika
+*       - zamienia dostepnosc pokoju na true w kolekcji hotel -> rooms (firebase) tak aby inni uzytkownicy mogli go wynajmywac
  */
 
 class HotelSingleRoomService @Inject constructor(

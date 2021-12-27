@@ -2,6 +2,7 @@ package com.example.bookinghotel.data.models
 
 /*
 * Surowy model dla danych z firebase
+* //TODO:: opisac UserRepository dla tego modelu
 * */
 
 data class User(

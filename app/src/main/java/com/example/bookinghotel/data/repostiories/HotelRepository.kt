@@ -8,8 +8,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 /*
-* Repozytorium dla modeli Hotel i Room
-* jest odpowiedzialna za operacje na tych kolekcjach
+* Repozytorium dla modeli Hotel
+* jest odpowiedzialna za operacje (zapis/odczyt itd...) na tej kolekcji
 * */
 
 open class HotelRepository : DaoRepository{
