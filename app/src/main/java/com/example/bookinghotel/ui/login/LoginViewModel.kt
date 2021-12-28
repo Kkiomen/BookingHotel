@@ -8,6 +8,12 @@ import kotlinx.coroutines.flow.StateFlow
 import java.lang.Exception
 import javax.inject.Inject
 
+/*
+* udostepnia do fragmentu:
+* pola email i password
+* loginUser() -> metoda ktora jest odpowiedzialna za logowanie uzytkownika do systemu (async)
+* */
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository

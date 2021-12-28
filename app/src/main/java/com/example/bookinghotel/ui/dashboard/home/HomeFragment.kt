@@ -16,6 +16,14 @@ import com.example.bookinghotel.ui.adapters.HomeRoomsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+/*
+* Fragment ma takie funkcjonalnosci:
+* - wyswietlic liste pokoji ktore sa mozliwe do wynajecia
+* - po wybraniu pokoju przeniesc do DetailedInformtionActivity
+* Fragment implementuje recyclerView
+* adapterem recyclerView jest HoomRoomsAdapter
+* */
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -33,21 +41,18 @@ class HomeFragment : Fragment() {
             false
         )
 
+        //Recycler view init
+        val adapter = HomeRoomsAdapter(viewModel.rooms)
         roomsRecyclerView = binding.homeRoomsRecyclerview
         roomsRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        viewModel.listOfHotels()
+        roomsRecyclerView.adapter = adapter
 
         lifecycleScope.launchWhenCreated {
             viewModel.homeState.collect{
                 when(it){
                     is HomeViewModel.HomeState.Success -> {
-                        //TODO:: Recycler View with list of hotels for this moment
-                        //TODO:: Because for know vieModel download only list of Hotels
-                        //TODO:: viewModel.hotels ->  list of Hotels from vieModel
-                        //TODO:: viewModel.listOfHotels() -> method which download list of hotels from firebase and put them into hotels list in viewModel
-                        //LukasSakwa
-                        roomsRecyclerView.adapter = HomeRoomsAdapter(viewModel.rooms)
+                        adapter.setList(viewModel.rooms)
+                        adapter.notifyDataSetChanged()
                     }
                     is HomeViewModel.HomeState.Error -> {
                         //TODO:: Handle error on UI
@@ -58,6 +63,12 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.listOfHotels()
     }
 
 }

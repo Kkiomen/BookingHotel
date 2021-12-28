@@ -13,6 +13,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/*
+* udostepnia do fragmentu:
+* pola email i password
+* registerUser() -> metoda ktora jest odpowiedzialna za zarejestrowanie uzytkownika do systemu (async)
+* */
+
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerRepository: RegisterRepository

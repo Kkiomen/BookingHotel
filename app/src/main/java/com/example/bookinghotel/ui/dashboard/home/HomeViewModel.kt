@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.bookinghotel.data.models.Hotel
 import com.example.bookinghotel.data.models.Room
 import com.example.bookinghotel.domain.model.HotelSingleRoom
+import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.firestore.ktx.toObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +15,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+
+/*
+* implementuje homeRepository
+* udostepnia do fragmentu:
+* liste rooms -> ktora zawiera pokoie o wartosci pola availibility == true
+* homeState -> ktory zwraca rezultat wykonania funkcji (czy funkcja zakonczyla sie sukcesem czy errorem)
+* listOfHotels() -> metoda ktora implementuje findAllHotelsWithRooms() z repozytorium
+* */
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -43,6 +52,9 @@ class HomeViewModel @Inject constructor(
                 .toMutableList()
 
             withContext(Dispatchers.Main){
+
+                Log.d("hotelsViewModel", rooms.toString())
+
                 _homeState.value = HomeState.Success
             }
         }catch (e : Exception){
@@ -50,6 +62,8 @@ class HomeViewModel @Inject constructor(
                 _homeState.value = HomeState.Error(e.message.toString())
             }
         }
+
+        _homeState.value = HomeState.Empty
     }
 
 }
