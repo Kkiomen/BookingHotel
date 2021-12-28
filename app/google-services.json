@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "355218115319",
+    "project_id": "roombooking-app",
+    "storage_bucket": "roombooking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355218115319:android:5a8801ceb50434b35861f2",
+        "android_client_info": {
+          "package_name": "com.example.bookinghotel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355218115319-3mk38kv2bkd30oo1bcgl7chncg31skr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4Gg19BJWZ7FuS_Rj9xgQTE_eGlnwn4w0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355218115319-3mk38kv2bkd30oo1bcgl7chncg31skr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
