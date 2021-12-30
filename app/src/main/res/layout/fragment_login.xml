@@ -156,7 +156,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="65dp"
             android:background="@drawable/button_reg_log_values"
-            android:text="REGISTER"
+            android:text="LOG IN"
             android:textColor="@color/white"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -4,14 +4,39 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:background="#D8D8D8"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/HomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@drawable/edittext_values"
+            android:layout_marginBottom="3dp"
+            android:text="Lista pokoi gotowa do wynajęcia!"
+            android:textSize="20dp"
+            android:padding="3dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/homeRoomsRecyclerview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeRoomsRecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            android:id="@+id/homeRoomsRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="464dp"
+            android:background="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
