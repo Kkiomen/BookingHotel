@@ -20,7 +20,7 @@
             android:layout_margin="6dp"
             android:background="@drawable/edittext_values"
             android:layout_marginBottom="3dp"
-            android:text="Lista pokoi gotowa do wynajęcia!"
+            android:text="Twoja lista rezerwacji!"
             android:textSize="20dp"
             android:padding="3dp"
             android:textColor="@color/black"
