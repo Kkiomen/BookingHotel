@@ -1,12 +1,9 @@
 package com.example.bookinghotel.ui
 
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookinghotel.R
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -38,4 +35,6 @@ class SplashScreen : AppCompatActivity() {
         }, 3000)
     }
 }
+
+//https://github.com/lopspower/CircularProgressBar progressBar documentation
 
