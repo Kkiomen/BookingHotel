@@ -67,23 +67,17 @@ class MainDashboardActivity : AppCompatActivity() {
                 R.id.nav_home -> {
                     homeFragmentTransaction
                         .replace(binding.homePanel.id, HomeFragment())
-
-                    Toast.makeText(this, "HOME", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_calendar -> {
                     homeFragmentTransaction
                         .replace(binding.homePanel.id, ReservationFragment())
-
-                    Toast.makeText(this, "RESERVATION", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_like -> {
-                    Toast.makeText(this, "LIKES PAGE", Toast.LENGTH_SHORT).show()
+
                 }
                 R.id.nav_settings -> {
                     homeFragmentTransaction
                         .replace(binding.homePanel.id, SettingsFragment())
-
-                    Toast.makeText(this, "SETTINGS", Toast.LENGTH_SHORT).show()
                 }
             }
             homeFragmentTransaction.commit()
