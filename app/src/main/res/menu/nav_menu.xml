@@ -15,12 +15,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:cnb_iconColor="#3F51B5" />
 
     <item
-            android:id="@+id/nav_like"
-            android:title="Likes"
-            android:icon="@drawable/icon_hearth"
-            app:cnb_iconColor="#673AB7" />
-
-    <item
             android:id="@+id/nav_settings"
             android:title="Settings"
             android:icon="@drawable/icon_user"
