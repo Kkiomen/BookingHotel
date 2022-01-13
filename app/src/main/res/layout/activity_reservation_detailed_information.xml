@@ -13,5 +13,70 @@
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                 android:textSize="24sp"/>
 
+        <TextView
+            android:id="@+id/hotelName"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:text="nameHotek"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testTextView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hotelAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hotelAddress2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/hotelAddress3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/reservationPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="DuplicateIds,MissingConstraints" />
+
+        <TextView
+            android:id="@+id/reservationDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="DuplicateIds,MissingConstraints" />
+
+        <TextView
+            android:id="@+id/reservationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="80dp"
+            tools:layout_editor_absoluteY="176dp"
+            tools:ignore="DuplicateIds,MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

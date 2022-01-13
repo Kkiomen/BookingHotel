@@ -28,6 +28,21 @@ class DetailedReservationInformationActivity : AppCompatActivity() {
         viewModel.userReservedRoom = intent.getSerializableExtra("UserRoom") as UserReservedRoom
 
         binding.testTextView.text = viewModel.userReservedRoom.toString()
+        //binding.address.text = viewModel.hotelRoom?.hotel?.address1.toString()
+
+
+
+
+        //HOTEL INFORMATION
+        binding.hotelName.text = viewModel.userReservedRoom.userHotel?.name.toString()
+        binding.hotelAddress.text = viewModel.userReservedRoom.userHotel?.address1.toString()
+        binding.hotelAddress2.text = viewModel.userReservedRoom.userHotel?.address2.toString()
+        binding.hotelAddress3.text = viewModel.userReservedRoom.userHotel?.address3.toString()
+
+        //RESERVATION INFORMATION
+        binding.reservationPerson.text = viewModel.userReservedRoom.userRoom?.persons.toString()
+        binding.reservationDescription.text = viewModel.userReservedRoom.userRoom?.description.toString()
+        binding.reservationNumber.text = viewModel.userReservedRoom.userRoom?.number.toString()
     }
 
 }

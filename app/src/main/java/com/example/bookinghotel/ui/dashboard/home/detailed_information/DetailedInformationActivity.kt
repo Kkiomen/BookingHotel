@@ -31,6 +31,7 @@ class DetailedInformationActivity : AppCompatActivity() {
 
 
 
+
         binding.name.text = viewModel.hotelRoom?.hotel?.name.toString()
         binding.address.text = viewModel.hotelRoom?.hotel?.address1.toString()
         binding.address2.text = viewModel.hotelRoom?.hotel?.address2.toString()

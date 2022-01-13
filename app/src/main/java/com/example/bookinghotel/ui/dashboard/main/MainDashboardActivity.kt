@@ -72,10 +72,6 @@ class MainDashboardActivity : AppCompatActivity() {
                     homeFragmentTransaction
                         .replace(binding.homePanel.id, ReservationFragment())
                 }
-                R.id.nav_settings -> {
-                    homeFragmentTransaction
-                        .replace(binding.homePanel.id, SettingsFragment())
-                }
             }
             homeFragmentTransaction.commit()
         }
