@@ -6,12 +6,15 @@
 
 
         <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/testTextView"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                android:textSize="24sp"/>
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/testTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="24sp"/>
 
         <TextView
             android:id="@+id/hotelName"
@@ -29,54 +32,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="88dp"
+            tools:layout_editor_absoluteY="186dp" />
 
         <TextView
             android:id="@+id/hotelAddress2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="39dp"
+            tools:layout_editor_absoluteY="128dp" />
 
         <TextView
             android:id="@+id/hotelAddress3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="138dp"
+            tools:layout_editor_absoluteY="128dp" />
 
         <TextView
             android:id="@+id/reservationPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="DuplicateIds,MissingConstraints" />
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="186dp" />
 
         <TextView
             android:id="@+id/reservationDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="DuplicateIds,MissingConstraints" />
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="128dp"
+            tools:layout_editor_absoluteY="221dp" />
 
         <TextView
             android:id="@+id/reservationNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="80dp"
-            tools:layout_editor_absoluteY="176dp"
-            tools:ignore="DuplicateIds,MissingConstraints" />
+            tools:ignore="DuplicateIds,MissingConstraints"
+            tools:layout_editor_absoluteX="54dp"
+            tools:layout_editor_absoluteY="221dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
