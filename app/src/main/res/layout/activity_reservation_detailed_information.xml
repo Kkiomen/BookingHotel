@@ -5,81 +5,150 @@
             android:layout_height="match_parent">
 
 
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="@drawable/bg_gradient_login_reg"
+            android:scaleType="matrix"
+            android:src="@drawable/login_register_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/iconreg"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/logo_kwadrat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:text="TextView"
+            android:id="@+id/AppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/testTextView"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="BOOKING HOTEL"
+            android:textColor="@color/white"
+            android:textSize="19dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iconreg" />
+
+        <TextView
+            android:id="@+id/testTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="24sp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.442" />
 
         <TextView
             android:id="@+id/hotelName"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:text="nameHotek"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/testTextView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.088"
+            />
 
         <TextView
             android:id="@+id/hotelAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="410dp"
             android:text="TextView"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="88dp"
-            tools:layout_editor_absoluteY="186dp" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bg"
+            />
 
         <TextView
             android:id="@+id/hotelAddress2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="TextView"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="39dp"
-            tools:layout_editor_absoluteY="128dp" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.28"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotelAddress" />
 
         <TextView
             android:id="@+id/hotelAddress3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="TextView"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="138dp"
-            tools:layout_editor_absoluteY="128dp" />
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.719"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotelAddress" />
 
         <TextView
             android:id="@+id/reservationPerson"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:ignore="DuplicateIds,MissingConstraints"
-            tools:layout_editor_absoluteX="157dp"
-            tools:layout_editor_absoluteY="186dp" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.807"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.747"
+            />
 
         <TextView
             android:id="@+id/reservationDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:ignore="DuplicateIds,MissingConstraints"
-            tools:layout_editor_absoluteX="128dp"
-            tools:layout_editor_absoluteY="221dp" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.698" />
 
         <TextView
             android:id="@+id/reservationNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:text="TextView"
-            tools:ignore="DuplicateIds,MissingConstraints"
-            tools:layout_editor_absoluteX="54dp"
-            tools:layout_editor_absoluteY="221dp" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationDescription"
+            app:layout_constraintVertical_bias="0.047"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
