@@ -1,6 +1,7 @@
 package com.example.bookinghotel.ui.dashboard.reservation.detailed_reservation_information
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookinghotel.databinding.ActivityDetailedInformationBinding
@@ -27,10 +28,12 @@ class DetailedReservationInformationActivity : AppCompatActivity() {
 
         viewModel.userReservedRoom = intent.getSerializableExtra("UserRoom") as UserReservedRoom
 
-        binding.testTextView.text = viewModel.userReservedRoom.toString()
+
         //binding.address.text = viewModel.hotelRoom?.hotel?.address1.toString()
 
-
+        binding.unreservationButton.setOnClickListener{
+            Toast.makeText(this, "Anulowanie rezerwacji przebiegło pomyślnie!", Toast.LENGTH_LONG).show()
+        }
 
 
         //HOTEL INFORMATION
